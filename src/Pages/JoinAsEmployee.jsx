@@ -35,11 +35,14 @@ const JoinAsEmployee = () => {
 	  const onSubmit = (data) => {
 		
 			
-		const {email, password, image, name, dateofbirth} = data
+		const {email, password, image, name, dateofbirth, employeePhoto} = data
 		const addUser = {
-			email: email,
-			role: "employee",
-			dateOfBirth: dateofbirth
+			name,
+			email,
+			role: "Employee",
+			dateofbirth,
+			affiliateWith: "",
+			employeePhoto
 		}
 		if(isPasswordValid(password)){
 			createUser(email, password)
@@ -106,8 +109,13 @@ const JoinAsEmployee = () => {
 				{errors.email && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
 			</div>
 			<div className="space-y-2">
+				<label htmlFor="employeePhoto" className="block text-sm">Your Photo</label>
+				<input type="url" name="employeePhoto" id="employeePhoto" placeholder="Your Photo URL" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("employeePhoto", { required: false })}/>
+				{errors.employeePhoto && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+			</div>
+			<div className="space-y-2">
 				<label htmlFor="dateofbirth" className="block text-sm">Date of Birth</label>
-				<input type="date" name="dateofbirth" id="dateofbirth" placeholder="youremail@gmail.com" className="w-full px-3 py-2 border bg-transparent border-black rounded-md" {...register("dateofbirth", { required: true })}/>
+				<input type="date" name="dateofbirth" id="dateofbirth" placeholder="" className="w-full px-3 py-2 border bg-transparent border-black rounded-md" {...register("dateofbirth", { required: true })}/>
 				{errors.dateofbirth && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
 			</div>
 			<div className="space-y-2">

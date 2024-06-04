@@ -19,7 +19,7 @@ const HeroSection = () => {
         <SwiperSlide><div className="contain flex h-full items-center justify-between gap-10">
         <div className="basis-1/2 flex flex-col items-start">
             <p className='px-6 rounded-2xl inline-block text-purple font-semibold bg-purple/10 text-left'>Effortless Asset Management for Your Business</p>
-            <h1 className='text-[3.5rem] font-sans text-left leading-[4.2rem] font-bold mt-2'>Streamline tracking and <span className='text-purple'>management</span> of company assets with our <span className='text-purple'>web app</span>.</h1>
+            <h1 className='text-[3.2rem] poppins text-left leading-[3.8rem] font-bold mt-2'>Streamline tracking and <span className='gradient-text2'>management</span> of company assets with our <span className='gradient-text1'>web app.</span></h1>
             <div className='grid grid-cols-3 mt-6 text-left gap-10'>
               <div>
                   <h1 className='text-[2.8rem] font-extrabold gradient-text1'>200+</h1>

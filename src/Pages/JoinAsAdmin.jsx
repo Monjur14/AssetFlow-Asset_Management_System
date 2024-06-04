@@ -41,12 +41,13 @@ const JoinAsAdmin = () => {
 		const {email, password, name, companyName, companyLogo, dateofbirth, packages} = data
 		const addUser = {
 			email,
-			role: "admin",
+			role: "Admin",
 			name,
 			companyName,
 			companyLogo,
 			dateofbirth,
-			packages
+			packages,
+			affiliateWith: ""
 		}
 		if(isPasswordValid(password)){
 			createUser(email, password)
@@ -107,7 +108,7 @@ const JoinAsAdmin = () => {
 			</div>
 			<div className="space-y-2">
 				<label htmlFor="companyLogo" className="block text-sm">Company Logo</label>
-				<input type="url" name="companyLogo" id="companyLogo" placeholder="Your Company Logo" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyLogo", { required: true })}/>
+				<input type="url" name="companyLogo" id="companyLogo" placeholder="Your Company Logo" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyLogo", { required: false })}/>
 				{errors.companyLogo && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
 			</div>
 			<div className="space-y-2">

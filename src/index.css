@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  /* border: 1px solid red; */
+}
+
 .contain{
   max-width: 1200px;
   margin: auto;
@@ -11,6 +15,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.poppins{
+  font-family: "Poppins", sans-serif;
 }
 .bg1{
   background-image: url(../src/assets/bg.jpg);
@@ -86,6 +93,15 @@
   background-image: linear-gradient(65deg, rgba(1,252,237,1) 0%, rgba(2,217,204,1) 50%);
   -webkit-background-clip: text;
   color: transparent;
+}
+.gradient-bg1{
+  background-image: linear-gradient(65deg, rgba(255,119,105,1) 0%, rgba(254,168,107,1) 50%);
+}
+.gradient-bg2{
+  background-image: linear-gradient(65deg, rgba(148,87,209,1) 0%, rgba(184,95,248,1) 50%);
+}
+.gradient-bg3{
+  background-image: linear-gradient(65deg, rgba(1,252,237,1) 0%, rgba(2,217,204,1) 50%);
 }
 
 .moving-div {

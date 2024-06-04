@@ -5,26 +5,40 @@ import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../CustomHook/UseAuth";
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
-    const [roles, setRoles] = useState([])
     
     const toggleNavbar = () => {
         setNav(!nav)
     }
     const {logout, user} = UseAuth()
-    useState(() => {
-      fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => {
-        setRoles(data)
-      })
-      .catch((error) => {
-        console.error("Error fetching roles:", error);
-      });
-    }, [])
-    const role = roles && roles[1] ? roles[0].role : '';
+    // useState(() => {
+    //   fetch("http://localhost:5000/users")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log("this is main data:", data)
+    //     const filter = data.filter((item) => item?.email === user?.email)
+    //     console.log("this is filter data:", filter)
+    //     setRoles(filter[0].role)
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching roles:", error);
+    //   });
+    // }, [user])
+
+    const { data } = useQuery({
+      queryKey: ['navUser'],
+      queryFn: () =>
+        fetch('http://localhost:5000/users').then((res) =>
+          res.json(),
+        ),
+    })
+    console.log(data)
+    const filterData = data?.filter((item) => item?.email === user?.email)
+    const roles = filterData?.[0]?.role
+
   return (
     <div className="w-full navbar"><div className="contain flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0">
     {
@@ -34,17 +48,16 @@ const Navbar = () => {
     <Tooltip id="my-tooltip" className="z-50"/>
     <ul className="gap-5 items-center text-sm 2xl:text-lg hidden lg:flex"> 
       <NavLink to={"/"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Home</NavLink>
-      {role === "admin" && <NavLink to={"/assetlist"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Asset List</NavLink>}
-      {role === "admin" && <NavLink to={"/addasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Add an Asset</NavLink>}
-      {role === "admin" && <NavLink to={"/allrequests"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>All Requests</NavLink>}
-      {role === "admin" && <NavLink to={"/customrequestslist"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Custom Requests List</NavLink>}
-      {role === "admin" && <NavLink to={"/myemployees"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Employees</NavLink>}
-      {role === "admin" && <NavLink to={"/addemployee"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Add Employee</NavLink>}
-      {role === "admin" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Profile</NavLink>}
-      {role === "employee" && <NavLink to={"/myassets"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Assets</NavLink>}
-      {role === "employee" && <NavLink to={"/myteam"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Team</NavLink>}
-      {role === "employee" && <NavLink to={"/requestforasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Request for an Asset</NavLink>}
-      {role === "employee" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Profile</NavLink>}
+      {roles === "Admin" && <NavLink to={"/assetlist"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Asset List</NavLink>}
+      {roles === "Admin" && <NavLink to={"/addasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Add an Asset</NavLink>}
+      {roles === "Admin" && <NavLink to={"/allrequests"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>All Requests</NavLink>}
+      {roles === "Admin" && <NavLink to={"/myemployees"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Employees</NavLink>}
+      {roles === "Admin" && <NavLink to={"/addemployee"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Add Employee</NavLink>}
+      {roles === "Admin" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Profile</NavLink>}
+      {roles === "Employee" && <NavLink to={"/myassets"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Assets</NavLink>}
+      {roles === "Employee" && <NavLink to={"/myteam"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>My Team</NavLink>}
+      {roles === "Employee" && <NavLink to={"/requestforasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Request for an Asset</NavLink>}
+      {roles === "Employee" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Profile</NavLink>}
     </ul>
     <div className="flex gap-4">
     <Tooltip id="my-tooltip2" className="z-50"/>
