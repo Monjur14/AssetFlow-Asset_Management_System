@@ -57,6 +57,10 @@
   background: linear-gradient(142deg, rgba(254,123,106,1) 0%, rgba(255,168,109,1) 50%);
 }
 
+.shad{
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
 .swiper {
   width: 100%;
   height: 90vh;

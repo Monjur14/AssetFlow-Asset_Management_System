@@ -24,6 +24,7 @@ import Profile from './Pages/Profile.jsx'
 import MyAssets from './Pages/MyAssets.jsx'
 import MyTeam from './Pages/MyTeam.jsx'
 import RequestForAsset from './Pages/RequestForAsset.jsx'
+import UpdateAsset from './Pages/UpdateAsset.jsx'
 
 const queryClient = new QueryClient()
 
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: "/requestforasset",
         element: <RequestForAsset/>
+      },
+      {
+        path: "/updateasset/:id",
+        element: <UpdateAsset/>
       }
     ]
   }

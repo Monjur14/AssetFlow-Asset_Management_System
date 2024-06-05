@@ -6,6 +6,7 @@ const AddAnAsset = () => {
   const { user } = UseAuth()
   const {
 		register,
+    reset,
 		handleSubmit,
 		formState: { errors }, 
 	  } = useForm()
@@ -13,8 +14,8 @@ const AddAnAsset = () => {
         const { productName, productImage, productType, productQuantity } = data
 
         const today = new Date();
-        const day = String(today.getDate()).padStart(2, '0'); // Add leading zero if needed
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based, add leading zero if needed
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
         const year = today.getFullYear();
         const formattedDate = `${day}/${month}/${year}`;
 
@@ -25,7 +26,8 @@ const AddAnAsset = () => {
           productName,
           productImage,
           productQuantity,
-          productType
+          productType,
+          availibility: "available"
         }
 
         fetch("http://localhost:5000/assets", {
@@ -51,6 +53,7 @@ const AddAnAsset = () => {
 				console.error('Error adding job:', error);
 				toast.error("Failed to Added");
 			});
+      reset()
     }
   return (
     <div className="w-full h-screen bg1">
