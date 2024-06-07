@@ -11,6 +11,10 @@ const AddEmployee = () => {
   //   queryFn: () =>
   //     fetch("http://localhost:5000/users").then((res) => res.json()),
   // });
+  const mainData = data?.filter((item) => item?.affiliateWith === "")
+  const adminData = data?.filter((item) => item?.email === user?.email)
+  const teamData = data?.filter((item) => item?.affiliateWith === adminData[0]?.companyName)
+
   useEffect(() => {
     fetch("http://localhost:5000/users")
     .then((res) => res.json())
@@ -22,13 +26,16 @@ const AddEmployee = () => {
     });
   }, [data]);
 
+  const employee = data?.filter((item) => item?.email === user?.email)
+  const company = employee[0]?.companyName
+
   const handleAddEmployee = (id) => {
-    if(mainData?.length - 1 < parseInt(adminData[0]?.packages)){
+    if(teamData?.length === parseInt(adminData[0]?.packages)){
         toast.error("You have reached your maximum members limit")
         return
       }
     const updatedItem = {
-      affiliateWith: user.email
+      affiliateWith: company
     }
 
     fetch(`http://localhost:5000/users/${id}`, {
@@ -49,9 +56,7 @@ const AddEmployee = () => {
   .catch(error => console.error("Error updating item:", error));
 
   }
-  const mainData = data?.filter((item) => item?.affiliateWith === "")
-  const teamData = data?.filter((item) => item?.affiliateWith === user?.email)
-  const adminData = data?.filter((item) => item?.email === user?.email)
+
 //  useEffect(() => {
 //     if(mainData?.length < parseInt(adminData[0]?.packages)){
 //       toast.error("You have reached your maximum members limit")

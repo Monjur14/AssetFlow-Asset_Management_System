@@ -43,11 +43,11 @@ const JoinAsAdmin = () => {
 			email,
 			role: "Admin",
 			name,
-			companyName,
+			companyName: companyName,
 			companyLogo,
 			dateofbirth,
 			packages,
-			affiliateWith: ""
+			affiliateWith: companyName
 		}
 		if(isPasswordValid(password)){
 			createUser(email, password)

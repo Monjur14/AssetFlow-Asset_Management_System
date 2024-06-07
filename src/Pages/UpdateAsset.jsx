@@ -176,8 +176,8 @@ const UpdateAsset = () => {
                 {...register("availibility", { required: true })}
               >
                 <option value="">Select Availibility</option>
-                <option value="Returnable">Available</option>
-                <option value="Non-Returnable">Out of Stock</option>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
               </select>
               {errors.availibility && (
                 <span className="text-sm text-red-600 font-semibold">

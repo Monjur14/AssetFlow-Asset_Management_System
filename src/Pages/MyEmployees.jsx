@@ -45,8 +45,10 @@ const MyEmployees = () => {
     })
     .catch(error => console.error("Error updating item:", error));
   }
-  const mainData = data?.filter((item) => item?.affiliateWith === user?.email)
   const adminData = data?.filter((item) => item?.email === user?.email)
+  const company = adminData[0]?.companyName
+  const mainData = data?.filter((item) => item?.affiliateWith === company)
+
   // useEffect(() => {
   //   if(mainData?.length < parseInt(adminData[0]?.packages)){
   //     toast.error("You have reached your maximum members limit")

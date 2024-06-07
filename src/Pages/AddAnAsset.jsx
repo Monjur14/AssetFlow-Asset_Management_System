@@ -2,7 +2,9 @@
 import { useForm } from "react-hook-form"
 import { ToastContainer, toast } from "react-toastify"
 import UseAuth from "../CustomHook/UseAuth"
+import { useEffect, useState } from "react"
 const AddAnAsset = () => {
+  const [company, setCompany] = useState(null)
   const { user } = UseAuth()
   const {
 		register,
@@ -10,6 +12,16 @@ const AddAnAsset = () => {
 		handleSubmit,
 		formState: { errors }, 
 	  } = useForm()
+
+    useEffect(() => {
+      fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => {
+        const currentAdmin = data.filter((item) => item.email === user.email)
+        setCompany(currentAdmin[0].companyName)
+      })
+    }, [])
+
     const assetSubmit = (data) => {
         const { productName, productImage, productType, productQuantity } = data
 
@@ -27,7 +39,8 @@ const AddAnAsset = () => {
           productImage,
           productQuantity,
           productType,
-          availibility: "available"
+          availibility: "available",
+          companyName: company
         }
 
         fetch("http://localhost:5000/assets", {
