@@ -100,7 +100,7 @@ const Navbar = () => {
     }
     </div>
       </div>
-    }
+    }                
                                                                 
                                                                      
 
