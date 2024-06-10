@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import { GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
@@ -7,6 +8,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import auth from "../Firebase/Firebase.init"
 
 const JoinAsEmployee = () => {
 	const navigate = useNavigate()
@@ -26,15 +28,51 @@ const JoinAsEmployee = () => {
 		);
 	  }
 	  const notify = () => toast.error("Password should have 1 uppercase letter, 1 lowercase letter and 6 character long");
-	  const { createUser, updateUserProfile, googleLogin } = UseAuth()
+	//   const { createUser, updateUserProfile, googleLogin } = UseAuth()
+	  const { createUser, updateUserProfile, } = UseAuth()
 	  const {
 		register,
 		handleSubmit,
 		formState: { errors }, 
 	  } = useForm()
-	  const onSubmit = (data) => {
-		
-			
+
+	  const googleProvider = new GoogleAuthProvider();
+	  const googleLogin = () => {
+       signInWithPopup(auth, googleProvider)
+	   .then((result) => {
+		const addUser = {
+			name: result.user?.displayName,
+			email: result.user?.email,
+			role: "Employee",
+			affiliateWith: "",
+		}
+		fetch("http://localhost:5000/users", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(addUser)
+		})
+		.then((res) => {
+			if (!res.ok) {
+				throw new Error(`Failed to Login: ${res.status} ${res.statusText}`);
+			}
+			return res.json();
+		})
+		.then((data) => {
+			console.log(data)
+			if(data.insertedId){
+				toast.success("Successfully Login");
+			}
+		})
+		.catch(error => {
+			console.error('Error adding job:', error);
+			toast.error("Failed to Login");
+		});
+	   })
+     }
+
+	  const onSubmit = (data) => {					
 		const {email, password, image, name, dateofbirth, employeePhoto} = data
 		const addUser = {
 			name,

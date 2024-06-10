@@ -43,7 +43,7 @@ const UpdateAsset = () => {
             addedDate: formattedDate,
             productName,
             productImage,
-            productQuantity,
+            productQuantity: parseInt(productQuantity),
             productType,
             availibility 
         }
@@ -66,6 +66,7 @@ const UpdateAsset = () => {
       .catch(error => console.error("Error updating Asset:", error));
     
       }
+      
   return (
     <div className="w-full h-screen bg1">
       <div className="max-w-md mx-auto">
@@ -80,7 +81,7 @@ const UpdateAsset = () => {
               </label>
               <input
                 type="text"
-                defaultValue={data[0]?.productName}
+                value={data[0]?.productName}
                 name="productName"
                 id="productName"
                 placeholder="Your Pruduct's Name"
@@ -189,7 +190,7 @@ const UpdateAsset = () => {
               type="submit"
               className="w-full mt-7 px-8 py-3 font-semibold rounded-md bg-purple text-white"
             >
-              Add This Asset
+              Update Asset
             </button>
           </div>
         </form>

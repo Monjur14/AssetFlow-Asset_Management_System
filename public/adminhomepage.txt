@@ -1,0 +1,53 @@
+import { useEffect, useState } from "react";
+import UseAuth from "../CustomHook/UseAuth";
+
+const AdminHomePage = () => {
+    const { user } = UseAuth()
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/requests")
+          .then((res) => res.json())
+          .then((data) => {
+            setData(data.filter((item) => item.postedBy === user.email && item.status === "Pending"));
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }, [data]);
+      const  pendingRequests = data?.slice(0, 5)
+      // console.log(pendingRequests)
+  return (
+    <div className="bg1 min-h-screen w-full">
+        <div className="contain">
+            <div>
+                <h1 className="text-[2rem] font-bold poppins text-center pt-5">Pending Requests</h1>
+                <div className="grid grid-cols-4 gap-7 mt-5">
+          {pendingRequests.map((item) => (
+            <div className="w-full border p-3 rounded-lg shad" key={item._id}>
+              <img
+                src={item.productImage}
+                alt=""
+                className="rounded-lg h-44 w-full object-cover"
+              />
+              <h1 className="text-base font-semibold mt-2 text-gray-700">
+                Product Name: <span className="text-black">{item.productName}</span>
+              </h1>
+              <h2 className="text-base font-semibold text-gray-700">
+                Product Type: <span className="text-black">{item.productType}</span>
+              </h2>
+              <h1 className="text-base font-semibold text-gray-700">
+                Requester Name: <span className="text-black">{item.requesterName}</span>
+              </h1>
+              <h2 className="text-base font-semibold text-gray-700">
+                Request Date: <span className="text-black">{item.requestedDate}</span>
+              </h2>                      
+            </div>
+          ))}
+        </div>
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default AdminHomePage

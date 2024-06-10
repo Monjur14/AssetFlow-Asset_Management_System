@@ -37,7 +37,7 @@ const AddAnAsset = () => {
           addedDate: formattedDate,
           productName,
           productImage,
-          productQuantity,
+          productQuantity: parseInt(productQuantity),
           productType,
           availibility: "available",
           companyName: company

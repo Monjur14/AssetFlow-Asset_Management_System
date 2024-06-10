@@ -8,7 +8,7 @@ const FirebaseProvider = (props) => {
     const [user, setUser] = useState(null)
 
     //social auth provider
-    const googleProvider = new GoogleAuthProvider();
+    // const googleProvider = new GoogleAuthProvider();
     const GithubProvider = new GithubAuthProvider();
 
     const createUser = (email, password) => {
@@ -21,9 +21,9 @@ const FirebaseProvider = (props) => {
     }
 
     //google signin
-    const googleLogin = () => {
-        return signInWithPopup(auth, googleProvider)
-    }
+    // const googleLogin = () => {
+    //     return signInWithPopup(auth, googleProvider)
+    // }
 
     //Github SignIn
     const githubLogin = () => {
@@ -52,7 +52,7 @@ const FirebaseProvider = (props) => {
           });
     }, [])
 
-    const allValues = { createUser, signInUser, googleLogin, githubLogin, logout, user, updateUserProfile }
+    const allValues = { createUser, signInUser, githubLogin, logout, user, updateUserProfile }
   return (
     <AuthContext.Provider value={allValues}>
       {props.children}

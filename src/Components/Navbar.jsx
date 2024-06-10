@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
+    const [data, setData] = useState([])
     
     const toggleNavbar = () => {
         setNav(!nav)
@@ -28,13 +29,24 @@ const Navbar = () => {
     //   });
     // }, [user])
 
-    const { data } = useQuery({
-      queryKey: ['navUser'],
-      queryFn: () =>
-        fetch('http://localhost:5000/users').then((res) =>
-          res.json(),
-        ),
-    })
+    // const { data } = useQuery({
+    //   queryKey: ['navUser'],
+    //   queryFn: () =>
+    //     fetch('http://localhost:5000/users').then((res) =>
+    //       res.json(),
+    //     ),
+    // })
+
+    useEffect(() => {
+        fetch("http://localhost:5000/users")
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data)
+        })
+        .catch((error) => {
+          console.error("Error fetching roles:", error);
+        });
+      }, [user])
     console.log(data)
     const filterData = data?.filter((item) => item?.email === user?.email)
     const roles = filterData?.[0]?.role

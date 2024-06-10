@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import UseAuth from "../CustomHook/UseAuth";
 
 const AssetList = () => {
+  const { user } = UseAuth()
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockStatus, setStockStatus] = useState("");
@@ -14,7 +16,7 @@ const AssetList = () => {
     fetch("http://localhost:5000/assets")
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        setData(data.filter((item) => item.postedBy === user.email));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -39,13 +41,13 @@ const AssetList = () => {
 
   const filteredData = data
     .filter((item) =>
-      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      item?.productName?.toLowerCase()?.includes(searchQuery.toLowerCase())
     )
     .filter((item) =>
-      stockStatus ? item.availibility.toLowerCase() === stockStatus.toLowerCase() : true
+      stockStatus ? item?.availibility?.toLowerCase() === stockStatus?.toLowerCase() : true
     )
     .filter((item) =>
-      assetType ? item.productType.toLowerCase() === assetType.toLowerCase() : true
+      assetType ? item?.productType?.toLowerCase() === assetType?.toLowerCase() : true
     )
     .sort((a, b) => {
       if (sortOrder === "asc") {
@@ -101,7 +103,7 @@ const AssetList = () => {
 
   return (
     <div className="w-full min-h-screen bg1">
-      <div className="contain pt-1">
+      <div className="contain pt-1 pb-10">
         <div className="mb-4 grid grid-cols-4 w-full gap-3 border-2 p-1 rounded-lg border-purple">
           <input
             type="text"

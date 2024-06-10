@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import UseAuth from "../CustomHook/UseAuth";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const RequestForAsset = () => {
+  const { user } = UseAuth()
+
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockStatus, setStockStatus] = useState("");
@@ -14,17 +18,37 @@ const RequestForAsset = () => {
   const [productImage, setProductImage] = useState(null)
   const [productType, setProductType] = useState(null)
   const [id, setId] = useState(null)
+  const [message, setMessage] = useState("")
+  const [userData, setUserData] = useState(null)
 
   useEffect(() => {
+
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(userData)
+      setUserData(data.filter((item) => item?.email === user.email));
+      // console.log(userData)
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+
+    // console.log(userData)
     fetch("http://localhost:5000/assets")
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        setData(data?.filter((item) => item?.companyName === userData?.[0]?.affiliateWith));
+        // console.log(data)
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, [data]);
+
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -41,13 +65,13 @@ const RequestForAsset = () => {
 
   const filteredData = data
     .filter((item) =>
-      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      item?.productName?.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .filter((item) =>
-      stockStatus ? item.availibility.toLowerCase() === stockStatus.toLowerCase() : true
+      stockStatus ? item?.availibility?.toLowerCase() === stockStatus?.toLowerCase() : true
     )
     .filter((item) =>
-      assetType ? item.productType.toLowerCase() === assetType.toLowerCase() : true
+      assetType ? item?.productType?.toLowerCase() === assetType?.toLowerCase() : true
     );
 
     const handleRequestAsset = (item) => {
@@ -62,10 +86,57 @@ const RequestForAsset = () => {
       setPopup(false)
     }
 
+    const handleConfirmRequest = () => {
+
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, '0');
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const year = today.getFullYear();
+      const formattedDate = `${day}/${month}/${year}`;
+
+      const request = {
+        requesterEmail: user.email,
+        requesterName: user.displayName,
+        postedBy,
+        productName,
+        productImage,
+        productType,
+        productId: id,
+        message: message,
+        requestedDate: formattedDate,
+        status: "Pending",
+        approvalDate: ""
+      }
+
+      fetch("http://localhost:5000/requests", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(request)
+			})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error(`Failed to confirm: ${res.status} ${res.statusText}`);
+				}
+				return res.json();
+			})
+			.then((data) => {
+				if(data.insertedId){
+					toast.success("Successfully confirmed your request");
+				}
+			})
+			.catch(error => {
+				console.error('Error adding job:', error);
+				toast.error("Failed to Confirm");
+			});
+      setMessage("")
+      setPopup(false)
+    }
     // console.log(postedBy)
   return (
     <div className="w-full min-h-screen bg1 relative overflow-hidden">
-      <div className="contain pt-1">
+      <div className="contain pt-1 pb-10">
         <div className="mb-4 grid grid-cols-3 w-full gap-3 border-2 p-1 rounded-lg border-purple">
           <input
             type="text"
@@ -122,10 +193,11 @@ const RequestForAsset = () => {
             <div className="flex justify-end">
               <button onClick={hidePopup}><IoMdClose  size={25}/></button>
             </div>
-            <textarea name="message" id="message" placeholder="Enter a short note for your HR Manager" className="p-1 w-full  border-2 border-purple/50 mt-3 rounded-md resize-none"></textarea>
-            <button  className="w-full gradient-bg2 text-md text-white py-1 rounded-md font-semibold mt-2">Confirm Request</button>
+            <textarea value={message} rows="5" onChange={(e) => setMessage(e.target.value)} name="message" id="message" placeholder="Enter a short note for your HR Manager" className="p-1 w-full  border-2 border-purple/50 mt-3 rounded-md resize-none"></textarea>
+            <button onClick={handleConfirmRequest}  className="w-full gradient-bg2 text-md text-white py-1 rounded-md font-semibold mt-2">Confirm Request</button>
           </div>
       </div>
+      <ToastContainer/>
     </div>
   )
 }
