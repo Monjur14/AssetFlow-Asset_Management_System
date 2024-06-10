@@ -103,7 +103,7 @@ const Navbar = () => {
     }                
                                                                 
                                                                      
-
+                          
 
 
     <h1 className="text-[2.2rem] block lg:hidden cursor-pointer ml-2" onClick={toggleNavbar}><GiHamburgerMenu /></h1>
