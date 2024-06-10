@@ -5,7 +5,7 @@ const AdminHomePage = () => {
     const { user } = UseAuth()
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/requests")
+        fetch("https://assetflow-server.vercel.app/requests")
           .then((res) => res.json())
           .then((data) => {
             setData(data.filter((item) => item.postedBy === user.email && item.status === "Pending"));

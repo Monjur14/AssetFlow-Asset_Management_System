@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import UseAuth from "../CustomHook/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const AllRequests = () => {
   const {user} = UseAuth()
@@ -11,7 +12,7 @@ const AllRequests = () => {
   const [matched, setMatched] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5000/requests")
+    fetch("https://assetflow-server.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         setData(data.filter((item) => item.postedBy === user.email && item.status === "Pending"));
@@ -42,7 +43,7 @@ const AllRequests = () => {
         confirmButtonText: "Yes, Reject it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/requests/${id}`, {
+          fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
             method: "DELETE",
           })
           .then(res => res.json())
@@ -85,7 +86,7 @@ const AllRequests = () => {
         approvalDate: formattedDate
       }
   
-      fetch(`http://localhost:5000/requests/${id}`, {
+      fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -102,7 +103,7 @@ const AllRequests = () => {
     })
     .catch(error => console.error("Error updating Asset:", error));
 
-    fetch(`http://localhost:5000/assets/decrement/${id2}`, {
+    fetch(`https://assetflow-server.vercel.app/assets/decrement/${id2}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"
@@ -119,7 +120,10 @@ const AllRequests = () => {
 
   return (
     <div className="w-full min-h-screen bg1">
-      <div className="contain pt-1 pb-10">
+      <Helmet>
+        <title>All Requests</title>
+      </Helmet>
+      <div className="contain pt-1 pb-10 px-2 md:px-3 lg:px-0">
         <div className="mb-4 grid grid-cols-1 w-full gap-3 border-2 p-1 rounded-lg border-purple">
           <input
             type="text"
@@ -129,7 +133,7 @@ const AllRequests = () => {
             className="p-2 border rounded-md outline-none"
           />
         </div>
-        <div className="grid grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7">
           {filteredData.map((item) => (
             <div className="w-full border p-3 rounded-lg shad" key={item._id}>
               <img

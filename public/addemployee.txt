@@ -7,7 +7,7 @@ const AddEmployee = () => {
   const { data } = useQuery({
     queryKey: ["addEmloyeeUser"],
     queryFn: () =>
-      fetch("http://localhost:5000/users").then((res) => res.json()),
+      fetch("https://assetflow-server.vercel.app/users").then((res) => res.json()),
   });
 
   const handleAddEmployee = (id) => {
@@ -15,7 +15,7 @@ const AddEmployee = () => {
       affiliateWith: user.email
     }
 
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://assetflow-server.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"

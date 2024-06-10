@@ -1,6 +1,7 @@
 import { ToastContainer, toast } from "react-toastify";
 import UseAuth from "../CustomHook/UseAuth";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 const MyTeam = () => {
   const { user } = UseAuth()
   const [data, setData] = useState([])
@@ -8,10 +9,10 @@ const MyTeam = () => {
   // const { data } = useQuery({
   //   queryKey: ["addEmloyeeUser"],
   //   queryFn: () =>
-  //     fetch("http://localhost:5000/users").then((res) => res.json()),
+  //     fetch("https://assetflow-server.vercel.app/users").then((res) => res.json()),
   // });
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://assetflow-server.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       setData(data)
@@ -30,7 +31,7 @@ const MyTeam = () => {
       affiliateWith: user.email
     }
 
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://assetflow-server.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"
@@ -68,6 +69,9 @@ const MyTeam = () => {
 //   }, [mainData])
   return (
     <div className="w-full min-h-screen bg1">
+      <Helmet>
+        <title>My Team</title>
+      </Helmet>
     <div className="contain">
       <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
         <div className="overflow-x-auto">
@@ -77,16 +81,16 @@ const MyTeam = () => {
             </div> */}
           <table className="min-w-full text-sm">
             <colgroup>
-              <col />
-              <col />
+              <col className=""/>
+              <col className="hidden md:block"/>
               <col />
               <col />
             </colgroup>
             <thead className="dark:bg-gray-300">
               <tr className="text-left">
-                <th className="p-3">Image</th>
-                <th className="p-3">Name</th>
-                <th className="p-3">Email</th>
+                <th className="p-3 ">Image</th>
+                <th className="p-3 ">Name</th>
+                <th className="p-3 hidden md:block">Email</th>
                 <th className="p-3 text-right">Role</th>
               </tr>
             </thead>
@@ -99,7 +103,7 @@ const MyTeam = () => {
                 <td className="p-3">
                   <p>{item.name}</p>
                 </td>
-                <td className="p-3">
+                <td className="p-3 hidden md:block">
                   <p>{item.email}</p>
                 </td>
                 <td className="p-3 text-right">

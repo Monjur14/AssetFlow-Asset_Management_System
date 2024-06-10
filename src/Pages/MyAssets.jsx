@@ -5,6 +5,7 @@ import UseAuth from "../CustomHook/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PrintAsset from "../Components/PrintAsset";
+import { Helmet } from "react-helmet-async";
 
 const MyAssets = () => {
   const { user } = UseAuth()
@@ -16,7 +17,7 @@ const MyAssets = () => {
   const [matched, setMatched] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5000/requests")
+    fetch("https://assetflow-server.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const filterData = data.filter((item) => item.requesterEmail === user.email)
@@ -61,7 +62,7 @@ const MyAssets = () => {
         confirmButtonText: "Yes, cancel it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/requests/${id}`, {
+          fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
             method: "DELETE",
           })
           .then(res => res.json())
@@ -90,7 +91,7 @@ const MyAssets = () => {
     }
 
     const handleReturn = (id, id2) => {
-      fetch(`http://localhost:5000/requests/${id}`, {
+      fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
         method: "DELETE",
       })
       .then(res => res.json())
@@ -105,7 +106,7 @@ const MyAssets = () => {
         console.error("Error deleting item:", error);
       });
 
-      fetch(`http://localhost:5000/assets/increment/${id2}`, {
+      fetch(`https://assetflow-server.vercel.app/assets/increment/${id2}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -124,9 +125,12 @@ const MyAssets = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Assets</title>
+      </Helmet>
       <div className="w-full min-h-screen bg1">
-        <div className="contain pt-1 pb-10">
-          <div className="mb-4 grid grid-cols-3 w-full gap-3 border-2 p-1 rounded-lg border-purple">
+        <div className="contain pt-1 pb-10 px-2 md:px-3 lg:px-0">
+          <div className="mb-4 grid  grid-cols-1 md:grid-cols-3 w-full gap-3 border-2 p-1 rounded-lg border-purple">
             <input
               type="text"
               placeholder="Search by product name..."
@@ -145,7 +149,7 @@ const MyAssets = () => {
               <option value="approved">Approved</option>
             </select>
           </div>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7">
             {filteredData.map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img

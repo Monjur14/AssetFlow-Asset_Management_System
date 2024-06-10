@@ -5,13 +5,14 @@ import Pricing from "./Pricing";
 import UseAuth from "../CustomHook/UseAuth";
 import AdminHomePage from "./AdminHomePage";
 import EmployeeHomePage from "./EmployeeHomePage";
+import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
   const [data, setData] = useState([])
   const {logout, user} = UseAuth()
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://assetflow-server.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       setData(data)
@@ -26,6 +27,9 @@ const roles = filterData?.[0]?.role
 console.log(roles)
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       {
         roles === undefined && 
         <div>

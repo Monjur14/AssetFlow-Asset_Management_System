@@ -6,13 +6,14 @@ import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { register } from "swiper/element";
 import UseAuth from "../CustomHook/UseAuth";
+import { Helmet } from "react-helmet-async";
 
 const UpdateAsset = () => {
     const { user } = UseAuth()
     const { id } = useParams()
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/assets")
+        fetch("https://assetflow-server.vercel.app/assets")
           .then((res) => res.json())
           .then((data) => {
             const filterData = data.filter((item) => item._id === id)
@@ -48,7 +49,7 @@ const UpdateAsset = () => {
             availibility 
         }
     
-        fetch(`http://localhost:5000/assets/${id}`, {
+        fetch(`https://assetflow-server.vercel.app/assets/${id}`, {
           method: "PUT",
           headers: {
               "Content-Type": "application/json"
@@ -69,6 +70,9 @@ const UpdateAsset = () => {
       
   return (
     <div className="w-full h-screen bg1">
+      <Helmet>
+        <title>Update Asset</title>
+      </Helmet>
       <div className="max-w-md mx-auto">
         <form action="" className="pt-5" onSubmit={handleSubmit(handleUpdateAsset)}>
           <div className="space-y-4">

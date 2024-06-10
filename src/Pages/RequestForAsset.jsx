@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import UseAuth from "../CustomHook/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 
 const RequestForAsset = () => {
@@ -26,7 +27,7 @@ const RequestForAsset = () => {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://assetflow-server.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       // console.log(userData)
@@ -38,7 +39,7 @@ const RequestForAsset = () => {
     });
 
     // console.log(userData)
-    fetch("http://localhost:5000/assets")
+    fetch("https://assetflow-server.vercel.app/assets")
       .then((res) => res.json())
       .then((data) => {
         setData(data?.filter((item) => item?.companyName === userData?.[0]?.affiliateWith));
@@ -108,7 +109,7 @@ const RequestForAsset = () => {
         approvalDate: ""
       }
 
-      fetch("http://localhost:5000/requests", {
+      fetch("https://assetflow-server.vercel.app/requests", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -136,8 +137,11 @@ const RequestForAsset = () => {
     // console.log(postedBy)
   return (
     <div className="w-full min-h-screen bg1 relative overflow-hidden">
-      <div className="contain pt-1 pb-10">
-        <div className="mb-4 grid grid-cols-3 w-full gap-3 border-2 p-1 rounded-lg border-purple">
+      <Helmet>
+        <title>Request for Asset</title>
+      </Helmet>
+      <div className="contain pt-1 pb-10 px-2 md:px-3 lg:px-0">
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-3 w-full gap-3 border-2 p-1 rounded-lg border-purple">
           <input
             type="text"
             placeholder="Search by product name..."
@@ -156,7 +160,7 @@ const RequestForAsset = () => {
             <option value="non-returnable">Non-Returnable</option>
           </select>
         </div>
-        <div className="grid grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7">
           {filteredData.map((item) => (
             <div className="w-full border p-3 rounded-lg shad" key={item._id}>
               <img

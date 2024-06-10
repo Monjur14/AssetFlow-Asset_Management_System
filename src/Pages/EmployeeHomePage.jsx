@@ -11,13 +11,13 @@ const EmployeeHomePage = () => {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/users")
+    fetch("https://assetflow-server.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
         const userData = data.find((item) => item.email === user.email)
         setUserData(userData)
     })
-    fetch("http://localhost:5000/requests")
+    fetch("https://assetflow-server.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const userRequests = data.filter((item) => item.requesterEmail === user.email);
@@ -101,14 +101,14 @@ const EmployeeHomePage = () => {
   };
     console.log(userData)
   return (
-    <div className='w-full bg1  min-h-screen'>
+    <div className='w-full bg1 min-h-screen'>
         {
-            userData?.affiliateWith === "" ? <div> <h1 className='text-center text-base pt-5 font-bold '>Currently your not affiliate with any company, Please contact with your HR manager</h1></div>  :
-            <div className='contain'>
+            userData?.affiliateWith === "" ? <div> <h1 className='text-center text-base pt-5 font-bold'>Currently your not affiliate with any company, Please contact with your HR manager</h1></div>  :
+            <div className='contain px-2 md:px-3 lg:scroll-px-40'>
       <section className="mb-10">
         <h2 className="text-[2rem] text-center pt-5 font-semibold mb-3">My Pending Requests</h2>
         {pendingRequests.length > 0 ? (
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-3 xxl:grid-cols-4 gap-7 mt-5">
             {pendingRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
                 <img
@@ -137,9 +137,9 @@ const EmployeeHomePage = () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-[2rem] text-center mt-20 font-semibold mb-3">My Monthly Requests</h2>
+        <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">My Monthly Requests</h2>
         {monthlyRequests.length > 0 ? (
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7 mt-5">
             {monthlyRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
                 <img
@@ -168,7 +168,7 @@ const EmployeeHomePage = () => {
       </section>
 
       <section className="pb-10">
-        <h2 className="text-[2rem] text-center mt-20 font-semibold mb-3">Calendar</h2>
+        <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">Calendar</h2>
         {renderCalendar()}
       </section>
     </div>

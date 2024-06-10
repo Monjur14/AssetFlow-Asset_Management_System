@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { ToastContainer, toast } from "react-toastify"
 import UseAuth from "../CustomHook/UseAuth"
 import { useEffect, useState } from "react"
+import { Helmet } from "react-helmet-async"
 const AddAnAsset = () => {
   const [company, setCompany] = useState(null)
   const { user } = UseAuth()
@@ -14,7 +15,7 @@ const AddAnAsset = () => {
 	  } = useForm()
 
     useEffect(() => {
-      fetch("http://localhost:5000/users")
+      fetch("https://assetflow-server.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         const currentAdmin = data.filter((item) => item.email === user.email)
@@ -43,7 +44,7 @@ const AddAnAsset = () => {
           companyName: company
         }
 
-        fetch("http://localhost:5000/assets", {
+        fetch("https://assetflow-server.vercel.app/assets", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -70,7 +71,10 @@ const AddAnAsset = () => {
     }
   return (
     <div className="w-full h-screen bg1">
-      <div className="max-w-md mx-auto">
+      <Helmet>
+        <title>Add an Asset</title>
+      </Helmet>
+      <div className="max-w-md mx-auto px-2 md:px-3 lg:px-0">
       <form action="" className="pt-5" onSubmit={handleSubmit(assetSubmit)}>
         <div className="space-y-4">
           <div className="space-y-1">

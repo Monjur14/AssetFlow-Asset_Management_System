@@ -25,6 +25,7 @@ import MyAssets from './Pages/MyAssets.jsx'
 import MyTeam from './Pages/MyTeam.jsx'
 import RequestForAsset from './Pages/RequestForAsset.jsx'
 import UpdateAsset from './Pages/UpdateAsset.jsx'
+import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient()
 
@@ -105,10 +106,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <FirebaseProvider>
-        <RouterProvider router={router}/>
-      </FirebaseProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <FirebaseProvider>
+          <RouterProvider router={router}/>
+        </FirebaseProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>
 )

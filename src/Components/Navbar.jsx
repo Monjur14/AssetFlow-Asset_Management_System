@@ -16,7 +16,7 @@ const Navbar = () => {
     }
     const {logout, user} = UseAuth()
     // useState(() => {
-    //   fetch("http://localhost:5000/users")
+    //   fetch("https://assetflow-server.vercel.app/users")
     //   .then((res) => res.json())
     //   .then((data) => {
     //     console.log("this is main data:", data)
@@ -32,13 +32,13 @@ const Navbar = () => {
     // const { data } = useQuery({
     //   queryKey: ['navUser'],
     //   queryFn: () =>
-    //     fetch('http://localhost:5000/users').then((res) =>
+    //     fetch('https://assetflow-server.vercel.app/users').then((res) =>
     //       res.json(),
     //     ),
     // })
 
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("https://assetflow-server.vercel.app/users")
         .then((res) => res.json())
         .then((data) => {
           setData(data)
@@ -56,7 +56,7 @@ const Navbar = () => {
     {
       user ? 
 <div className="w-full flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0 ">
-        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow"><img src="/src/assets/logo1.png" alt="" className="w-44" /></Link>
+        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow"><img src="/logo1.png" alt="" className="w-32 lg:w-44" /></Link>
     <Tooltip id="my-tooltip" className="z-50"/>
     <ul className="gap-5 items-center text-sm 2xl:text-lg hidden lg:flex"> 
       <NavLink to={"/"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Home</NavLink>
@@ -83,7 +83,7 @@ const Navbar = () => {
       </div>
 
       : <div className="w-full flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0">
-        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow" className="w-44"><img src="/src/assets/logo1.png" alt="" /></Link>
+        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow" className="w-44"><img src="/logo1.png" alt="" /></Link>
     <Tooltip id="my-tooltip" className="z-50"/>
     <ul className="gap-5 items-center text-xl hidden lg:flex"> 
       <NavLink to={"/"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Home</NavLink>
@@ -111,14 +111,21 @@ const Navbar = () => {
           <h1 className="text-[3rem] absolute top-3 right-3 cursor-pointer" onClick={toggleNavbar}><MdOutlineClose /></h1>
           <ul className="gap-5 items-center text-2xl flex flex-col">
           <NavLink to={"/"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Home</NavLink>
-          <NavLink to={"/artandcraft"} className={({isActive}) => isActive ? "font-bold cursor-pointer text--700" : "cursor-pointer"} onClick={toggleNavbar}>All Items</NavLink>
-      {user && <NavLink to={"/additem"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Add Item</NavLink>}
-      {user && <NavLink to={"/mylist"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>My List</NavLink>}
+      {roles === "Admin" && <NavLink to={"/assetlist"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Asset List</NavLink>}
+      {roles === "Admin" && <NavLink to={"/addasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Add an Asset</NavLink>}
+      {roles === "Admin" && <NavLink to={"/allrequests"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>All Requests</NavLink>}
+      {roles === "Admin" && <NavLink to={"/myemployees"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>My Employees</NavLink>}
+      {roles === "Admin" && <NavLink to={"/addemployee"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Add Employee</NavLink>}
+      {roles === "Admin" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Profile</NavLink>}
+      {roles === "Employee" && <NavLink to={"/myassets"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>My Assets</NavLink>}
+      {roles === "Employee" && <NavLink to={"/myteam"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>My Team</NavLink>}
+      {roles === "Employee" && <NavLink to={"/requestforasset"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Request for an Asset</NavLink>}
+      {roles === "Employee" && <NavLink to={"/profile"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"} onClick={toggleNavbar}>Profile</NavLink>}
           </ul>
           {
       user?.email ? <div className="flex gap-2 w-full justify-center mt-5">
-        <Link to={"/"}><button onClick={logout} className="bg-cyan-700 text-white font-semibold text-xl px-6 py-2 rounded-md mx-">Logout</button></Link></div> : <div className="flex flex-col items-center mt-4 gap-4">
-        <Link to={"/login"}><button className="border-cyan-700 border-2 w-40 text-center py-2 rounded-md text-xl font-semibold" onClick={toggleNavbar}>Login</button></Link>
+        <Link to={"/"}><button onClick={logout} className="bg-purple text-white font-semibold text-xl px-6 py-2 rounded-md mx-">Logout</button></Link></div> : <div className="flex flex-col items-center mt-4 gap-4">
+        <Link to={"/login"}><button className="border-purple border-2 w-40 text-center py-2 rounded-md text-xl font-semibold" onClick={toggleNavbar}>Login</button></Link>
         <Link to={"/register"} className="bg-purple text-white font-semibold text-xl w-40 text-center py-2 rounded-md" onClick={toggleNavbar}>Register</Link>
       </div>
     }

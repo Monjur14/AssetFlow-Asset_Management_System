@@ -7,7 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { Helmet } from 'react-helmet-async';
 
 const stripePromise = loadStripe('pk_test_51PQ08d06r4LiuGszyTNoicQqEbt2whQGaWQL0DULtI3bTQWj5rUVJ2jhV6E3VEc6dVCWOilQJilhwqrY7pULj3EU00VQryh9ga'); // Replace with your Stripe publishable key
 
@@ -52,7 +51,6 @@ const CheckoutForm = ({ amount, onSuccess }) => {
         if (confirmedPayment.error) {
           toast.error(confirmedPayment.error.message);
         } else {
-          toast.success('Payment Successful');
           onSuccess();
         }
       }
@@ -74,7 +72,6 @@ const JoinAsAdmin = () => {
   const [show, setShow] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
-  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
   const toggleShow = () => {
     setShow(!show);
@@ -92,7 +89,6 @@ const JoinAsAdmin = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues
   } = useForm();
 
   const isPasswordValid = (password) => {
@@ -117,7 +113,7 @@ const JoinAsAdmin = () => {
       companyName,
       companyLogo,
       dateofbirth,
-      packages: selectedPackage,
+      packages,
       affiliateWith: companyName
     };
 
@@ -126,8 +122,8 @@ const JoinAsAdmin = () => {
         .then((result) => {
           updateUserProfile(name, companyLogo)
             .then(() => {
-              toast.success("Successfully Registered");
-              navigate("/");
+              // toast.success("Successfully Registered")
+              // navigate("/")
             })
         })
         .catch(error => {
@@ -168,77 +164,70 @@ const JoinAsAdmin = () => {
 
   return (
     <div className='w-full h-full bg2'>
-      <Helmet>
-        <title>Join as Admin</title>
-      </Helmet>
       <div className='w-full mx-auto max-w-md p-4 rounded-md  sm:p-8'>
-        {!selectedPackage && !isPaymentSuccessful && (
-          <div className="space-y-2">
-            <label htmlFor="packages" className="block text-sm">Select Your Package</label>
-            <select name="packages" id="packages" className="w-full px-3 bg-transparent py-2 border border-black rounded-md" onChange={(e) => setSelectedPackage(e.target.value)}>
-              <option value="">Select Your Package</option>
-              <option value="5">5 Members for $5</option>
-              <option value="10">10 Members for $8</option>
-              <option value="20">20 Members for $15</option>
-            </select>
+        <form noValidate="" action="" className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="block text-sm">Name</label>
+              <input type="text" name="name" id="name" placeholder="Your Name" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("name", { required: true })} />
+              {errors.name && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm">Email address</label>
+              <input type="email" name="email" id="email" placeholder="youremail@gmail.com" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("email", { required: true })} />
+              {errors.email && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="companyName" className="block text-sm">Company Name</label>
+              <input type="text" name="companyName" id="companyName" placeholder="Your Company Name" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyName", { required: true })} />
+              {errors.companyName && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="companyLogo" className="block text-sm">Company Logo</label>
+              <input type="url" name="companyLogo" id="companyLogo" placeholder="Your Company Logo" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyLogo", { required: false })} />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="dateofbirth" className="block text-sm">Date of Birth</label>
+              <input type="date" name="dateofbirth" id="dateofbirth" placeholder="Date of Birth" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("dateofbirth", { required: true })} />
+              {errors.dateofbirth && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="packages" className="block text-sm">Your Package</label>
+              <select name="packages" id="packages" className="w-full px-3 bg-transparent py-2 border border-black rounded-md" {...register("packages", { required: true })}>
+                <option value="">Select Your Package</option>
+                <option value="5">5 Members for $5</option>
+                <option value="10">10 Members for $8</option>
+                <option value="20">20 Members for $15</option>
+              </select>
+              {errors.packages && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <label htmlFor="password" className="text-sm">Password</label>
+              </div>
+              <div className='w-full px-3 py-2 border border-black rounded-md flex  justify-between items-center'>
+                <input type={show ? "text" : "password"} name="password" id="password" placeholder="*****" className="w-full bg-transparent outline-none" {...register("password", { required: true })} />
+                {show ? <IoEyeOutline className='text-xl cursor-pointer' onClick={toggleShow} /> : <IoEyeOffOutline className='text-xl cursor-pointer' onClick={toggleShow} />}
+              </div>
+              {errors.password && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
+            </div>
           </div>
-        )}
 
-        {selectedPackage && !isPaymentSuccessful && (
+          <button type="submit" className="w-full mt-5 px-8 py-3 font-semibold rounded-md bg-purple text-white" disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Sign Up'}
+          </button>
+        </form>
+
+        {selectedPackage && (
           <div className="mt-8">
             <h2 className="text-xl mb-4">Payment</h2>
             <Elements stripe={stripePromise}>
-              <CheckoutForm amount={parseInt(selectedPackage) * 100} onSuccess={() => setIsPaymentSuccessful(true)} />
+              <CheckoutForm amount={parseInt(selectedPackage) * 100} onSuccess={() => navigate("/")} />
             </Elements>
           </div>
         )}
 
-        {isPaymentSuccessful && (
-          <form noValidate="" className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="name" className="block text-sm">Name</label>
-                <input type="text" name="name" id="name" placeholder="Your Name" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("name", { required: true })} />
-                {errors.name && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm">Email address</label>
-                <input type="email" name="email" id="email" placeholder="youremail@gmail.com" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("email", { required: true })} />
-                {errors.email && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="companyName" className="block text-sm">Company Name</label>
-                <input type="text" name="companyName" id="companyName" placeholder="Your Company Name" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyName", { required: true })} />
-                {errors.companyName && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="companyLogo" className="block text-sm">Company Logo</label>
-                <input type="url" name="companyLogo" id="companyLogo" placeholder="Your Company Logo" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("companyLogo", { required: false })} />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="dateofbirth" className="block text-sm">Date of Birth</label>
-                <input type="date" name="dateofbirth" id="dateofbirth" placeholder="Date of Birth" className="w-full bg-transparent px-3 py-2 border border-black rounded-md" {...register("dateofbirth", { required: true })} />
-                {errors.dateofbirth && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <label htmlFor="password" className="text-sm">Password</label>
-                </div>
-                <div className='w-full px-3 py-2 border border-black rounded-md flex  justify-between items-center'>
-                  <input type={show ? "text" : "password"} name="password" id="password" placeholder="*****" className="w-full bg-transparent outline-none" {...register("password", { required: true })} />
-                  {show ? <IoEyeOutline className='text-xl cursor-pointer' onClick={toggleShow} /> : <IoEyeOffOutline className='text-xl cursor-pointer' onClick={toggleShow} />}
-                </div>
-                {errors.password && <span className='text-sm text-red-600 font-semibold'>This field is required</span>}
-              </div>
-            </div>
-
-            <button type="submit" className={`w-full mt-5 px-8 py-3 font-semibold rounded-md bg-purple text-white`} disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Sign Up'}
-            </button>
-          </form>
-        )}
-
-        <p className="text-md text-center mt-3">Already have an account?
+        <p className="text-md text-center mt-3">Already have account?
           <Link to={"/login"} rel="noopener noreferrer" className="focus:underline hover:underline font-semibold"> Sign In here</Link>
         </p>
         <ToastContainer />

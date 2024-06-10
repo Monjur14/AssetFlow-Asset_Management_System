@@ -14,7 +14,7 @@ const AdminHomePage = () => {
   const [nonReturnableCount, setNonReturnableCount] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/requests")
+    fetch("https://assetflow-server.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const filteredData = data.filter(
@@ -28,7 +28,7 @@ const AdminHomePage = () => {
         console.error("Error fetching data:", error);
       });
 
-    fetch("http://localhost:5000/assets")
+    fetch("https://assetflow-server.vercel.app/assets")
       .then((res) => res.json())
       .then((assets) => {
         const limitedStock = assets.filter((item) => item.productQuantity < 10 && item.postedBy === user.email);
@@ -105,12 +105,12 @@ const AdminHomePage = () => {
   console.log(data)
   return (
     <div className="bg1 min-h-screen w-full">
-      { data.length === 0 ? <div className="contain"><h1 className="text-base text-center font-bold pt-10">You have not any pending request from emloyees.</h1></div> : <div className="contain">
+      { data.length === 0 ? <div className="contain"><h1 className="text-base text-center font-bold pt-10">You have not any pending request from emloyees.</h1></div> : <div className="contain px-2 md:px-3 lg:px-0">
         <div>
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Pending Requests
           </h1>
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {data.slice(0, 5).map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img
@@ -134,11 +134,11 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-10 lg:mt-20">
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Top Requested Items
           </h1>
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {topItems.map((item, index) => (
               <div className="w-full border p-3 rounded-lg shad" key={index}>
                 <img
@@ -153,11 +153,11 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-10 lg:mt-20">
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Limited Stock Items
           </h1>
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {limitedStockItems.map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img
@@ -175,7 +175,7 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-10 lg:mt-20">
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Returnable vs Non-Returnable Items
           </h1>
@@ -185,11 +185,11 @@ const AdminHomePage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-10 lg:mt-20">
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Most Recent Requests
           </h1>
-          <div className="grid grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {recentRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img
@@ -213,12 +213,12 @@ const AdminHomePage = () => {
             ))}
           </div>
         </div>
-        <div className="mt-20 pb-20">
+        <div className="mt-10 lg:mt-20 pb-20">
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Statistics Summary
           </h1>
           <div className="flex justify-center mt-5">
-            <div className="w-1/2 p-5 border rounded-lg shad">
+            <div className="max-w-[500px] p-5 border rounded-lg shad">
               <h2 className="text-base font-semibold text-gray-700">
                 Total Requests: <span className="text-black">{statisticsSummary.totalRequests}</span>
               </h2>
