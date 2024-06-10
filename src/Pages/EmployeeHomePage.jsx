@@ -108,7 +108,7 @@ const EmployeeHomePage = () => {
       <section className="mb-10">
         <h2 className="text-[2rem] text-center pt-5 font-semibold mb-3">My Pending Requests</h2>
         {pendingRequests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-3 xxl:grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-3 2xl:grid-cols-4 gap-7 mt-5">
             {pendingRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
                 <img
@@ -139,7 +139,7 @@ const EmployeeHomePage = () => {
       <section className="mb-10">
         <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">My Monthly Requests</h2>
         {monthlyRequests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 mt-5">
             {monthlyRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
                 <img

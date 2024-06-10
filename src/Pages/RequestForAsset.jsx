@@ -160,7 +160,7 @@ const RequestForAsset = () => {
             <option value="non-returnable">Non-Returnable</option>
           </select>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7">
           {filteredData.map((item) => (
             <div className="w-full border p-3 rounded-lg shad" key={item._id}>
               <img

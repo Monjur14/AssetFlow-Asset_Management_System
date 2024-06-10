@@ -110,7 +110,7 @@ const AdminHomePage = () => {
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Pending Requests
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {data.slice(0, 5).map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img
@@ -138,7 +138,7 @@ const AdminHomePage = () => {
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Top Requested Items
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {topItems.map((item, index) => (
               <div className="w-full border p-3 rounded-lg shad" key={index}>
                 <img
@@ -157,7 +157,7 @@ const AdminHomePage = () => {
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Limited Stock Items
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {limitedStockItems.map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img
@@ -189,7 +189,7 @@ const AdminHomePage = () => {
           <h1 className="text-[2rem] font-bold poppins text-center pt-5">
             Most Recent Requests
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-7 mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-7 mt-5">
             {recentRequests.map((item) => (
               <div className="w-full border p-3 rounded-lg shad" key={item._id}>
                 <img

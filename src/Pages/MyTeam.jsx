@@ -82,7 +82,7 @@ const MyTeam = () => {
           <table className="min-w-full text-sm">
             <colgroup>
               <col className=""/>
-              <col className="hidden md:block"/>
+              <col className="hidden md:inline-block"/>
               <col />
               <col />
             </colgroup>
@@ -90,7 +90,7 @@ const MyTeam = () => {
               <tr className="text-left">
                 <th className="p-3 ">Image</th>
                 <th className="p-3 ">Name</th>
-                <th className="p-3 hidden md:block">Email</th>
+                <th className="p-3 hidden md:inline-block">Email</th>
                 <th className="p-3 text-right">Role</th>
               </tr>
             </thead>
@@ -103,7 +103,7 @@ const MyTeam = () => {
                 <td className="p-3">
                   <p>{item.name}</p>
                 </td>
-                <td className="p-3 hidden md:block">
+                <td className="p-3 hidden md:inline-block">
                   <p>{item.email}</p>
                 </td>
                 <td className="p-3 text-right">

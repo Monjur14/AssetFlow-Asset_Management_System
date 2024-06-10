@@ -77,15 +77,15 @@ const AddEmployee = () => {
               </div>
             <table className="min-w-full text-sm">
               <colgroup>
-                <col className="hidden md:block"/>
-                <col className="hidden md:block"/>
+                <col className="hidden md:inline-block"/>
+                <col className="hidden md:inline-block"/>
                 <col />
                 <col />
               </colgroup>
               <thead className="dark:bg-gray-300">
                 <tr className="text-left">
-                  <th className="p-3 hidden md:block">Image</th>
-                  <th className="p-3 hidden md:block">Name</th>
+                  <th className="p-3 hidden md:inline-block">Image</th>
+                  <th className="p-3 hidden md:inline-block">Name</th>
                   <th className="p-3">Email</th>
                   <th className="p-3 text-right">Add to the Team</th>
                 </tr>
@@ -93,10 +93,10 @@ const AddEmployee = () => {
               <tbody>
                 {mainData?.map((item) => (
                   <tr key={item._id} className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
-                  <td className="p-3 hidden md:block">
+                  <td className="p-3 hidden md:inline-block">
                     <img src={item.employeePhoto || "https://i.ibb.co/3prgXcC/userImg.jpg"} alt="" className="w-10 h-10 border rounded-md"/>
                   </td>
-                  <td className="p-3 hidden md:block">
+                  <td className="p-3 hidden md:inline-block">
                     <p>{item.name}</p>
                   </td>
                   <td className="p-3">
