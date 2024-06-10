@@ -1,52 +1,54 @@
-# CraftoPia
+# Asset Management System
 
-## Description
-Craftopia is an online hub for art and craft enthusiasts, offering a diverse range of handmade creations to explore and discover. From paintings to sculptures, users can connect with talented artisans, find inspiration for their own projects, and join a vibrant community of like-minded individuals. Craftopia is where creativity thrives
+## Overview
+The Asset Management System is a web application designed to help businesses efficiently manage their assets and track employee usage. It offers a user-friendly interface for HR managers to monitor asset requests, track inventory, and streamline asset management processes.
 
-## Live Link
-[CraftoPia](https://assignment10-a.web.app/)
+## Admin Credentials
+- **Username:** admin@gmail.com
+- **Password:** Admin123
 
+## Live Site
+[Asset Management System](https://assetflow-14.web.app)
 
 ## Key Features
+- **Firebase Authentication Integration:** Secure signup, login, and logout functionality.
+- **Role-based Access Control:** Distinct features and permissions for HR managers and employees.
+- **Asset Tracking:** Track the status, quantity, and usage of company assets.
+- **Request Management:** Employees can request assets, and HR managers can approve or reject requests.
+- **Inventory Management:** Add, update, and delete assets from the inventory.
+- **Reporting:** Generate reports on asset usage, inventory status, and employee activity.
+- **Responsive Design:** Optimized for use on desktop, tablet, and mobile devices.
+- **Data Visualization:** Use charts and graphs to visualize asset data and trends.
+- **Customizable:** Tailor the application to suit your company's specific asset management needs.
+- **Payment Integration:** Seamless integration with payment gateways for subscription management.
 
-1. **Firebase Authentication Integration:**
-   - Secure user signup, login, and logout functionality using Firebase Authentication.
-   - Custom user profiles for personalized experience.
+## Technologies Used
+- React
+- Firebase
+- Stripe
+- React Query
+- Material-UI
+- React PDF Renderer
+- Chart.js
+- Emotion
+- React Router
+- React Hook Form
+- React Icons
+- Swiper
+- SweetAlert2
+- React Leaflet
+- React Tooltip
+- MUI Data Grid
 
-2. **Private Routes and Authorization:**
-   - Restrict access to specific pages or features to authenticated users through private routes.
-   - Ensure data security and privacy.
+## Getting Started
+1. Clone this repository.
+2. Install dependencies with `npm install`.
+3. Set up Firebase and Stripe configurations.
+4. Run the application with `npm start`.
+5. Access the application at `https://assetflow-14.web.app`.
 
-3. **Art & Craft Listings:**
-   - Display a wide range of art and craft items for users to explore.
-   - Various categories and subcategories showcased.
+## Contributing
+Contributions are welcome! Please follow the contribution guidelines outlined in CONTRIBUTING.md.
 
-4. **Detailed Product Information:**
-   - Comprehensive details provided for each art and craft item.
-   - Includes images, item names, descriptions, prices, ratings, and stock status.
-
-## NPM Packages Used
-
-- `react-router-dom`: For routing within the React application.
-- `react-awesome-reveal`: For adding reveal animations to elements.
-- `react-hook-form`: For building forms with easy validation in React.
-- `react-toastify`: For displaying toast notifications in response to user actions.
-- `react-icons`: For adding icons to the user interface.
-- `firebase`: For integrating Firebase services such as authentication and database storage.
-
-## Additional Features
-
-1. **Art & Craft Categories Section:**
-   - Display at least 6 art & craft subcategories with images and information.
-   - Subcategories match with the art & craft data "subcategory_Name".
-
-2. **Subcategory Page:**
-   - User can click on a subcategory card to view all arts and crafts of that specific subcategory.
-   - Each art & craft item card includes image, item name, subcategory name, short description, price, rating, and a "View Details" button.
-
-3. **Dark/Light Theme Toggle:**
-   - Implement a toggle switch to switch between dark and light themes on the home page.
-
-4. **Additional Packages:**
-   - `react-awesome-reveal`: Implement reveal animations for elements on the home page.
-   - `react-tooltip`: Add tooltips to provide additional information for elements on the home page.
+## License
+This project is licensed under the MIT License. See the LICENSE.md file for details.
