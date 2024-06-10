@@ -99,7 +99,7 @@ const Navbar = () => {
       </div>
     }
     </div>
-      </div>
+      </div>                    
     }                
                                                                 
                                                                      
