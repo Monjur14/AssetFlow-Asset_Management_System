@@ -43,7 +43,7 @@ const FirebaseProvider = (props) => {
           })
     }
 
-
+                      
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
