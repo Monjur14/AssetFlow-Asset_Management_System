@@ -3,12 +3,14 @@
 ## Overview
 The Asset Management System is a web application designed to help businesses efficiently manage their assets and track employee usage. It offers a user-friendly interface for HR managers to monitor asset requests, track inventory, and streamline asset management processes.
 
-## Admin Credentials
-- **Username:** admin@gmail.com
-- **Password:** Admin123
+## For an enhanced project experience:
+- **Admin Username:** admin@gmail.com
+- **Admin Password:** Admin123
+- **Employee Username:** employee@gmail.com
+- **Employee Password:** Employee123
 
 ## Live Site
-[Asset Management System](https://assetflow-14.web.app)
+[AssetFlow](https://assetflow-14.netlify.app/)
 
 ## Key Features
 - **Firebase Authentication Integration:** Secure signup, login, and logout functionality.
@@ -45,10 +47,5 @@ The Asset Management System is a web application designed to help businesses eff
 2. Install dependencies with `npm install`.
 3. Set up Firebase and Stripe configurations.
 4. Run the application with `npm start`.
-5. Access the application at `https://assetflow-14.web.app`.
+5. Access the application at `https://assetflow-14.netlify.app`.
 
-## Contributing
-Contributions are welcome! Please follow the contribution guidelines outlined in CONTRIBUTING.md.
-
-## License
-This project is licensed under the MIT License. See the LICENSE.md file for details.
