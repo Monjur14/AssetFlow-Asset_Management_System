@@ -13,7 +13,7 @@ const Login = () => {
 	const toggleShow = () => {
 		setShow(!show)
 	}
-	const {signInUser, googleLogin, githubLogin} = UseAuth()
+	const {signInUser, googleLogin} = UseAuth()
 
 	const {
 		register,

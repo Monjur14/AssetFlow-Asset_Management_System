@@ -82,8 +82,8 @@ const Navbar = () => {
     </div>
       </div>
 
-      : <div className="w-full flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0">
-        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow" className="w-44"><img src="/logo1.png" alt="" /></Link>
+      : <div className="w-full flex justify-between items-center py-2 lg:py-3 lg:px-0">
+        <Link to={"/"} data-tooltip-id="my-tooltip" data-tooltip-content="AssetFlow" className="w-32 lg:w-44"><img src="/logo1.png" alt=""/></Link>
     <Tooltip id="my-tooltip" className="z-50"/>
     <ul className="gap-5 items-center text-xl hidden lg:flex"> 
       <NavLink to={"/"} className={({isActive}) => isActive ? "font-bold cursor-pointer text-purple" : "cursor-pointer"}>Home</NavLink>
