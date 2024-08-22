@@ -14,7 +14,7 @@ const AdminHomePage = () => {
   const [nonReturnableCount, setNonReturnableCount] = useState(0);
 
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/requests")
+    fetch("https://assetflow-server-side.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const filteredData = data.filter(
@@ -28,7 +28,7 @@ const AdminHomePage = () => {
         console.error("Error fetching data:", error);
       });
 
-    fetch("https://assetflow-server.vercel.app/assets")
+    fetch("https://assetflow-server-side.vercel.app/assets")
       .then((res) => res.json())
       .then((assets) => {
         const limitedStock = assets.filter((item) => item.productQuantity < 10 && item.postedBy === user.email);

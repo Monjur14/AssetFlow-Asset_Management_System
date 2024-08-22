@@ -17,7 +17,7 @@ const MyAssets = () => {
   const [matched, setMatched] = useState([])
 
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/requests")
+    fetch("https://assetflow-server-side.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const filterData = data.filter((item) => item.requesterEmail === user.email)
@@ -62,7 +62,7 @@ const MyAssets = () => {
         confirmButtonText: "Yes, cancel it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
+          fetch(`https://assetflow-server-side.vercel.app/requests/${id}`, {
             method: "DELETE",
           })
           .then(res => res.json())
@@ -91,7 +91,7 @@ const MyAssets = () => {
     }
 
     const handleReturn = (id, id2) => {
-      fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
+      fetch(`https://assetflow-server-side.vercel.app/requests/${id}`, {
         method: "DELETE",
       })
       .then(res => res.json())
@@ -106,7 +106,7 @@ const MyAssets = () => {
         console.error("Error deleting item:", error);
       });
 
-      fetch(`https://assetflow-server.vercel.app/assets/increment/${id2}`, {
+      fetch(`https://assetflow-server-side.vercel.app/assets/increment/${id2}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

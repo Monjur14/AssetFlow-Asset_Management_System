@@ -13,7 +13,7 @@ const UpdateAsset = () => {
     const { id } = useParams()
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("https://assetflow-server.vercel.app/assets")
+        fetch("https://assetflow-server-side.vercel.app/assets")
           .then((res) => res.json())
           .then((data) => {
             const filterData = data.filter((item) => item._id === id)
@@ -49,7 +49,7 @@ const UpdateAsset = () => {
             availibility 
         }
     
-        fetch(`https://assetflow-server.vercel.app/assets/${id}`, {
+        fetch(`https://assetflow-server-side.vercel.app/assets/${id}`, {
           method: "PUT",
           headers: {
               "Content-Type": "application/json"

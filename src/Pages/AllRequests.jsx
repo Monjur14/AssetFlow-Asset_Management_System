@@ -12,7 +12,7 @@ const AllRequests = () => {
   const [matched, setMatched] = useState([])
 
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/requests")
+    fetch("https://assetflow-server-side.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         setData(data.filter((item) => item.postedBy === user.email && item.status === "Pending"));
@@ -43,7 +43,7 @@ const AllRequests = () => {
         confirmButtonText: "Yes, Reject it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
+          fetch(`https://assetflow-server-side.vercel.app/requests/${id}`, {
             method: "DELETE",
           })
           .then(res => res.json())
@@ -86,7 +86,7 @@ const AllRequests = () => {
         approvalDate: formattedDate
       }
   
-      fetch(`https://assetflow-server.vercel.app/requests/${id}`, {
+      fetch(`https://assetflow-server-side.vercel.app/requests/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -103,7 +103,7 @@ const AllRequests = () => {
     })
     .catch(error => console.error("Error updating Asset:", error));
 
-    fetch(`https://assetflow-server.vercel.app/assets/decrement/${id2}`, {
+    fetch(`https://assetflow-server-side.vercel.app/assets/decrement/${id2}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"

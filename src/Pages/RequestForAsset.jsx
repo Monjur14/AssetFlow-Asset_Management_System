@@ -27,7 +27,7 @@ const RequestForAsset = () => {
   }, [])
 
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/users")
+    fetch("https://assetflow-server-side.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       // console.log(userData)
@@ -39,7 +39,7 @@ const RequestForAsset = () => {
     });
 
     // console.log(userData)
-    fetch("https://assetflow-server.vercel.app/assets")
+    fetch("https://assetflow-server-side.vercel.app/assets")
       .then((res) => res.json())
       .then((data) => {
         setData(data?.filter((item) => item?.companyName === userData?.[0]?.affiliateWith));
@@ -109,7 +109,7 @@ const RequestForAsset = () => {
         approvalDate: ""
       }
 
-      fetch("https://assetflow-server.vercel.app/requests", {
+      fetch("https://assetflow-server-side.vercel.app/requests", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -120,7 +120,7 @@ const RequestForAsset = () => {
 				if (!res.ok) {
 					throw new Error(`Failed to confirm: ${res.status} ${res.statusText}`);
 				}
-				return res.json();
+				return res.json();   
 			})
 			.then((data) => {
 				if(data.insertedId){
@@ -136,7 +136,7 @@ const RequestForAsset = () => {
     }
     // console.log(postedBy)
   return (
-    <div className="w-full min-h-screen bg1 relative overflow-hidden">
+    <div className="w-full min-h-screen bg1 overflow-hidden">
       <Helmet>
         <title>Request for Asset</title>
       </Helmet>
@@ -192,8 +192,8 @@ const RequestForAsset = () => {
             </div>
           </div> */}
       </div>
-      <div className={`h-full w-screen bg-transparent backdrop-blur-sm absolute top-0 ${!popup && "hidden"}`}>
-          <div className={`pb-5 w-96 bg-white border absolute top-40 popup rounded-md shad p-2`}>
+      <div className={`h-full w-screen bg-transparent backdrop-blur-sm fixed flex items-center justify-center z-50 top-0 ${!popup && "hidden"}`}>
+          <div className={`pb-5 w-96 bg-white border popup rounded-md shad p-2`}>
             <div className="flex justify-end">
               <button onClick={hidePopup}><IoMdClose  size={25}/></button>
             </div>

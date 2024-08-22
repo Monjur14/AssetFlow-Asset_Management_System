@@ -11,13 +11,13 @@ const EmployeeHomePage = () => {
 
   useEffect(() => {
 
-    fetch("https://assetflow-server.vercel.app/users")
+    fetch("https://assetflow-server-side.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
         const userData = data.find((item) => item.email === user.email)
         setUserData(userData)
     })
-    fetch("https://assetflow-server.vercel.app/requests")
+    fetch("https://assetflow-server-side.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
         const userRequests = data.filter((item) => item.requesterEmail === user.email);

@@ -1,4 +1,4 @@
-# Asset Management Syystem
+# Asset Management System
 
 ## Overview
 The Asset Management System is a web application designed to help businesses efficiently manage their assets and track employee usage. It offers a user-friendly interface for HR managers to monitor asset requests, track inventory, and streamline asset management processes.

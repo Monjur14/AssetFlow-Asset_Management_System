@@ -47,7 +47,7 @@ const JoinAsEmployee = () => {
 			role: "Employee",
 			affiliateWith: "",
 		}
-		fetch("https://assetflow-server.vercel.app/users", {
+		fetch("https://assetflow-server-side.vercel.app/users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -95,7 +95,7 @@ const JoinAsEmployee = () => {
 		} else {
 			notify()
 		}
-		fetch("https://assetflow-server.vercel.app/users", {
+		fetch("https://assetflow-server-side.vercel.app/users", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"

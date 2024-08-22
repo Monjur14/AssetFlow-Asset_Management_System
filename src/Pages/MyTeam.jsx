@@ -9,10 +9,10 @@ const MyTeam = () => {
   // const { data } = useQuery({
   //   queryKey: ["addEmloyeeUser"],
   //   queryFn: () =>
-  //     fetch("https://assetflow-server.vercel.app/users").then((res) => res.json()),
+  //     fetch("https://assetflow-server-side.vercel.app/users").then((res) => res.json()),
   // });
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/users")
+    fetch("https://assetflow-server-side.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       setData(data)
@@ -31,7 +31,7 @@ const MyTeam = () => {
       affiliateWith: user.email
     }
 
-    fetch(`https://assetflow-server.vercel.app/users/${id}`, {
+    fetch(`https://assetflow-server-side.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"

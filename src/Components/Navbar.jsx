@@ -16,7 +16,7 @@ const Navbar = () => {
     }
     const {logout, user} = UseAuth()
     // useState(() => {
-    //   fetch("https://assetflow-server.vercel.app/users")
+    //   fetch("https://assetflow-server-side.vercel.app/users")
     //   .then((res) => res.json())
     //   .then((data) => {
     //     console.log("this is main data:", data)
@@ -32,13 +32,13 @@ const Navbar = () => {
     // const { data } = useQuery({
     //   queryKey: ['navUser'],
     //   queryFn: () =>
-    //     fetch('https://assetflow-server.vercel.app/users').then((res) =>
+    //     fetch('https://assetflow-server-side.vercel.app/users').then((res) =>
     //       res.json(),
     //     ),
     // })
 
     useEffect(() => {
-        fetch("https://assetflow-server.vercel.app/users")
+        fetch("https://assetflow-server-side.vercel.app/users")
         .then((res) => res.json())
         .then((data) => {
           setData(data)

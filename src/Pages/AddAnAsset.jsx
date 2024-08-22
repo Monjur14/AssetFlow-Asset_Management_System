@@ -15,7 +15,7 @@ const AddAnAsset = () => {
 	  } = useForm()
 
     useEffect(() => {
-      fetch("https://assetflow-server.vercel.app/users")
+      fetch("https://assetflow-server-side.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         const currentAdmin = data.filter((item) => item.email === user.email)
@@ -44,7 +44,7 @@ const AddAnAsset = () => {
           companyName: company
         }
 
-        fetch("https://assetflow-server.vercel.app/assets", {
+        fetch("https://assetflow-server-side.vercel.app/assets", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"

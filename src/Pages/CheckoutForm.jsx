@@ -24,7 +24,7 @@ const CheckoutForm = ({ amount, onSuccess }) => {
       toast.error(error.message);
     } else {
       // Send paymentMethod.id to your server to create a PaymentIntent
-      const response = await fetch("https://assetflow-server.vercel.app/create-payment-intent", {
+      const response = await fetch("https://assetflow-server-side.vercel.app/create-payment-intent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

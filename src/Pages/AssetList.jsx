@@ -14,7 +14,7 @@ const AssetList = () => {
   const [matched, setMatched] = useState([])
 
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/assets")
+    fetch("https://assetflow-server-side.vercel.app/assets")
       .then((res) => res.json())
       .then((data) => {
         setData(data.filter((item) => item.postedBy === user.email));
@@ -71,7 +71,7 @@ const AssetList = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://assetflow-server.vercel.app/assets/${id}`, {
+          fetch(`https://assetflow-server-side.vercel.app/assets/${id}`, {
             method: "DELETE",
           })
           .then(res => res.json())

@@ -12,7 +12,7 @@ const Home = () => {
   const [data, setData] = useState([])
   const {logout, user} = UseAuth()
   useEffect(() => {
-    fetch("https://assetflow-server.vercel.app/users")
+    fetch("https://assetflow-server-side.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       setData(data)

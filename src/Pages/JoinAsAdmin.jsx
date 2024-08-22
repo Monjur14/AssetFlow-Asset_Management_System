@@ -32,7 +32,7 @@ const CheckoutForm = ({ amount, onSuccess }) => {
     if (error) {
       toast.error(error.message);
     } else {
-      const response = await fetch("https://assetflow-server.vercel.app/create-payment-intent", {
+      const response = await fetch("https://assetflow-server-side.vercel.app/create-payment-intent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -141,7 +141,7 @@ const JoinAsAdmin = () => {
       return;
     }
 
-    fetch("https://assetflow-server.vercel.app/users", {
+    fetch("https://assetflow-server-side.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
