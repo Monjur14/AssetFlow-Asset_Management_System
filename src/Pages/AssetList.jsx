@@ -157,23 +157,23 @@ const AssetList = () => {
                   alt=""
                   className="rounded-lg h-44 w-full object-cover"
                 />
-                <h1 className="text-base 2xl:text-lg font-semibold mt-2 text-gray-700">
+                <h1 className="text-base  font-semibold mt-2 text-gray-700">
                   Product Name:{" "}
                   <span className="text-black">{item.productName}</span>
                 </h1>
-                <h2 className="text-base 2xl:text-lg font-semibold text-gray-700">
+                <h2 className="text-base font-semibold text-gray-700">
                   Product Type:{" "}
                   <span className="text-black">{item.productType}</span>
                 </h2>
-                <h2 className="text-base 2xl:text-lg font-semibold text-gray-700">
+                <h2 className="text-base font-semibold text-gray-700">
                   Product Quantity:{" "}
                   <span className="text-black">{item.productQuantity}</span>
                 </h2>
-                <h2 className="text-base 2xl:text-lg font-semibold text-gray-700">
+                <h2 className="text-base font-semibold text-gray-700">
                   Availability:{" "}
                   <span className="text-black">{item.availibility}</span>
                 </h2>
-                <h2 className="text-base 2xl:text-lg font-semibold text-gray-700">
+                <h2 className="text-base font-semibold text-gray-700">
                   Added Date:{" "}
                   <span className="text-black">{item.addedDate}</span>
                 </h2>
