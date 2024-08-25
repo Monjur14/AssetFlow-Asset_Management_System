@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../CustomHook/UseAuth";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { useQuery } from "@tanstack/react-query";
+import { Squash as Hamburger } from 'hamburger-react'
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -26,12 +26,22 @@ const Navbar = () => {
         console.error("Error fetching roles:", error);
       });
   }, [user]);
+  useEffect(() => {
+    if (nav) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [nav]);
   console.log(data);
   const filterData = data?.filter((item) => item?.email === user?.email);
   const roles = filterData?.[0]?.role;
 
   return (
-    <div className="w-full navbar">
+    <div className="w-full navbar relative border-2">
       <div className="contain flex justify-between items-center py-2 lg:py-1 xxl:py-3 px-3 lg:px-0">
         {user ? (
           <div className="w-full flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0 ">
@@ -295,24 +305,13 @@ const Navbar = () => {
             </div>
           </div>
         )}
-
-        <h1
-          className="text-[2.2rem] block lg:hidden cursor-pointer ml-2"
-          onClick={toggleNavbar}
-        >
-          <GiHamburgerMenu />
-        </h1>
+        <span onClick={toggleNavbar} className="zind">
+          <Hamburger size={28}/>
+        </span>
         <div
-          className={`contain bg-white h-screen w-full ${
-            nav ? "fixed" : "hidden"
-          } top-0 left-0 flex flex-col justify-center z-50`}
+          className={`menu-slide ${nav && "open"} border-2 border-red-700 flex flex-col justify-center`}
         >
-          <h1
-            className="text-[3rem] absolute top-3 right-3 cursor-pointer"
-            onClick={toggleNavbar}
-          >
-            <MdOutlineClose />
-          </h1>
+
           <ul className="gap-5 items-center text-2xl flex flex-col">
             <NavLink
               to={"/"}

@@ -23,7 +23,7 @@ const Footer = () => {
 			  Our asset management system ensures the seamless tracking and maintenance of all your valuable assets and inefficiencies.
               </p>
               <p className="mt-4 text-sm text-deep-purple-50">
-			  Developed by industry experts, our system provides unparalleled accuracy and reliability, optimal performance for your asset portfolio.
+			  Developed by industry expert, our system provides unparalleled accuracy and reliability, optimal performance for your asset portfolio.
               </p>
             </div>
           </div>
