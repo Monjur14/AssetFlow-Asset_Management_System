@@ -6,11 +6,10 @@ import {
 } from '@tanstack/react-query'
 import App from './App.jsx'
 import './index.css'
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createBrowserRouter, RouterProvider, ScrollRestoration} from "react-router-dom"
 import Home from './Pages/Home.jsx'
 import NotFound from './Components/NotFound.jsx'
 import Login from './Components/Login.jsx'
-import RegisterPage from './Components/RegisterPage.jsx'
 import FirebaseProvider from './FirebaseProvider/FirebaseProvider.jsx'
 import JoinAsEmployee from './Pages/JoinAsEmployee.jsx'
 import JoinAsAdmin from './Pages/JoinAsAdmin.jsx'
@@ -43,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login/>
-      },
-      {
-        path: "/register",
-        element: <RegisterPage/>
       },
       {
         path: '/joinasemployee',
@@ -108,8 +103,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <FirebaseProvider>
-          <RouterProvider router={router}/>
+        <FirebaseProvider>         
+            <RouterProvider router={router}>
+              <ScrollRestoration/>
+            </RouterProvider>
         </FirebaseProvider>
       </QueryClientProvider>
     </HelmetProvider>

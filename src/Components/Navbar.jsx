@@ -41,7 +41,7 @@ const Navbar = () => {
   const roles = filterData?.[0]?.role;
 
   return (
-    <div className="w-full navbar relative border-2">
+    <div className="w-full navbar relative">
       <div className="contain flex justify-between items-center py-2 lg:py-1 xxl:py-3 px-3 lg:px-0">
         {user ? (
           <div className="w-full flex justify-between items-center py-2 lg:py-3 px-3 lg:px-0 ">
@@ -188,7 +188,7 @@ const Navbar = () => {
             <div className="flex gap-4">
               <Tooltip id="my-tooltip2" className="z-50" />
               {user?.email ? (
-                <div className="flex justify-end items-center flex-1 lg:flex-none gap-2 lg:mr-0">
+                <div className="flex justify-end items-center flex-1 lg:flex-none md:gap-2 -mr-2 lg:mr-0">
                   <img
                     src={
                       user.photoURL ||
@@ -197,7 +197,7 @@ const Navbar = () => {
                     data-tooltip-id="my-tooltip4"
                     data-tooltip-content={user.displayName}
                     alt=""
-                    className="w-10 h-10 border-2 border-purple rounded-full cursor-pointer justify-self-end"
+                    className="w-8 h-8 md:w-10 md:h-10 border-2 border-purple rounded-full cursor-pointer justify-self-end"
                   />{" "}
                   <Tooltip id="my-tooltip4" className="z-50" />
                   <Link to={"/"}>
@@ -305,14 +305,14 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        <span onClick={toggleNavbar} className="zind">
-          <Hamburger size={28}/>
+        <span onClick={toggleNavbar} className="zind block lg:hidden">
+          <Hamburger size={28} toggled={nav} toggle={setNav}/>
         </span>
         <div
-          className={`menu-slide ${nav && "open"} border-2 border-red-700 flex flex-col justify-center`}
+          className={`menu-slide ${nav && "open"} flex flex-col justify-center`}
         >
 
-          <ul className="gap-5 items-center text-2xl flex flex-col">
+          <ul className="gap-5 items-center text-xl flex flex-col">
             <NavLink
               to={"/"}
               className={({ isActive }) =>
@@ -470,18 +470,25 @@ const Navbar = () => {
             <div className="flex flex-col items-center mt-4 gap-4">
               <Link to={"/login"}>
                 <button
-                  className="border-purple border-2 w-40 text-center py-2 rounded-md text-xl font-semibold"
+                  className="border-purple border-2 w-52 text-center py-2 rounded-md text-lg font-semibold"
                   onClick={toggleNavbar}
                 >
                   Login
                 </button>
               </Link>
               <Link
-                to={"/register"}
-                className="bg-purple text-white font-semibold text-xl w-40 text-center py-2 rounded-md"
+                to={"/joinasemployee"}
+                className="bg-purple text-white font-semibold text-lg w-52 text-center py-2 rounded-md"
                 onClick={toggleNavbar}
               >
-                Register
+                Join as Employee
+              </Link>
+              <Link
+                to={"/joinasadmin"}
+                className="bg-purple text-white font-semibold text-lg w-52 text-center py-2 rounded-md"
+                onClick={toggleNavbar}
+              >
+                Join as admin
               </Link>
             </div>
           )}

@@ -7,7 +7,7 @@ import Headroom from 'react-headroom'
 function App() {
   return (
     <div>
-    <Headroom>
+    <Headroom style={{ zIndex: 1000, position: 'fixed', width: '100%' }}>
       <Navbar/>
     </Headroom>
       <div className='flex flex-col w-full h-screen'>       
