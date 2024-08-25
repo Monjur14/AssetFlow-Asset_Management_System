@@ -10,12 +10,14 @@ import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
   const {logout, user} = UseAuth()
   useEffect(() => {
     fetch("https://assetflow-server-side.vercel.app/users")
     .then((res) => res.json())
     .then((data) => {
       setData(data)
+      setLoading(false)
     })
     .catch((error) => {
       console.error("Error fetching roles:", error);
@@ -31,6 +33,12 @@ console.log(roles)
         <title>Home</title>
       </Helmet>
       {
+        loading ? 
+        <div className="h-[70vh] w-full flex justify-center items-center">
+          <span className="loader"></span>
+        </div> :
+        <div>
+      {
         roles === undefined && 
         <div>
           <HeroSection/>
@@ -41,7 +49,14 @@ console.log(roles)
       {
         roles === "Admin"  && 
         <div>
-          <AdminHomePage/>
+          {
+            loading ? 
+            <div className="h-[70vh] w-full bg-white flex justify-center items-center">
+              <span className="loader"></span>
+            </div> :
+            <AdminHomePage/>
+          }
+          
         </div>
       }
       {
@@ -50,6 +65,10 @@ console.log(roles)
           <EmployeeHomePage/>
         </div>
       }
+      </div>
+      }
+      
+      
     </div>
   );
 };

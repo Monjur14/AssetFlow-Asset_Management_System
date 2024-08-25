@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import UseAuth from '../CustomHook/UseAuth';
+import React, { useEffect, useState } from "react";
+import UseAuth from "../CustomHook/UseAuth";
 
 const EmployeeHomePage = () => {
   const { user } = UseAuth();
@@ -7,24 +7,27 @@ const EmployeeHomePage = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [monthlyRequests, setMonthlyRequests] = useState([]);
   const [message, setMessage] = useState("");
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-
     fetch("https://assetflow-server-side.vercel.app/users")
-    .then((res) => res.json())
-    .then((data) => {
-        const userData = data.find((item) => item.email === user.email)
-        setUserData(userData)
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        const userData = data.find((item) => item.email === user.email);
+        setUserData(userData);
+      });
     fetch("https://assetflow-server-side.vercel.app/requests")
       .then((res) => res.json())
       .then((data) => {
-        const userRequests = data.filter((item) => item.requesterEmail === user.email);
+        const userRequests = data.filter(
+          (item) => item.requesterEmail === user.email
+        );
         setData(userRequests);
 
         // Filter pending requests
-        const pending = userRequests.filter((item) => item.status === "Pending");
+        const pending = userRequests.filter(
+          (item) => item.status === "Pending"
+        );
         setPendingRequests(pending);
 
         // Get current month and year
@@ -34,14 +37,14 @@ const EmployeeHomePage = () => {
 
         // Filter monthly requests
         const monthly = userRequests.filter((item) => {
-          const [day, month, year] = item.requestedDate.split('/').map(Number);
+          const [day, month, year] = item.requestedDate.split("/").map(Number);
           return month === currentMonth && year === currentYear;
         });
 
         // Sort by most recent first
         monthly.sort((a, b) => {
-          const [dayA, monthA, yearA] = a.requestedDate.split('/').map(Number);
-          const [dayB, monthB, yearB] = b.requestedDate.split('/').map(Number);
+          const [dayA, monthA, yearA] = a.requestedDate.split("/").map(Number);
+          const [dayB, monthB, yearB] = b.requestedDate.split("/").map(Number);
           const dateA = new Date(yearA, monthA - 1, dayA);
           const dateB = new Date(yearB, monthB - 1, dayB);
           return dateB - dateA;
@@ -73,7 +76,10 @@ const EmployeeHomePage = () => {
         } else {
           const isToday = day === today.getDate();
           week.push(
-            <td key={j} className={`border p-2 ${isToday ? 'bg-blue-200' : ''}`}>
+            <td
+              key={j}
+              className={`border p-2 ${isToday ? "bg-blue-200" : ""}`}
+            >
               {day}
             </td>
           );
@@ -88,91 +94,120 @@ const EmployeeHomePage = () => {
       <table className="table-auto w-full border-collapse">
         <thead>
           <tr>
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
-              <th key={index} className="border p-2">
-                {day}
-              </th>
-            ))}
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+              (day, index) => (
+                <th key={index} className="border p-2">
+                  {day}
+                </th>
+              )
+            )}
           </tr>
         </thead>
         <tbody>{weeks}</tbody>
       </table>
     );
   };
-    console.log(userData)
+  console.log(userData);
   return (
-    <div className='w-full bg1 min-h-screen'>
-        {
-            userData?.affiliateWith === "" ? <div> <h1 className='text-center text-base pt-5 font-bold'>Currently your not affiliate with any company, Please contact with your HR manager</h1></div>  :
-            <div className='contain px-2 md:px-3 lg:scroll-px-40'>
-      <section className="mb-10">
-        <h2 className="text-[2rem] text-center pt-5 font-semibold mb-3">My Pending Requests</h2>
-        {pendingRequests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-3 2xl:grid-cols-4 gap-7 mt-5">
-            {pendingRequests.map((item) => (
-              <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
-                <img
-                  src={item.productImage}
-                  alt=""
-                  className="rounded-lg h-44 w-full object-cover"
-                />
-                <h1 className="text-base font-semibold mt-2 text-gray-700">
-                  Product Name: <span className="text-black">{item.productName}</span>
-                </h1>
-                <h2 className="text-base font-semibold text-gray-700">
-                  Product Type: <span className="text-black">{item.productType}</span>
-                </h2>
-                <h1 className="text-base font-semibold text-gray-700">
-                  Requester Name: <span className="text-black">{item.requesterName}</span>
-                </h1>
-                <h2 className="text-base font-semibold text-gray-700">
-                  Request Date: <span className="text-black">{item.requestedDate}</span>
-                </h2>
+    <div className="w-full bg1 min-h-screen">
+      {userData?.affiliateWith === "" ? (
+        <div className="flex flex-col items-center justify-center h-[70vh]">
+          <img src="/src/assets/NotFoundSVG.svg" alt="" className="w-full lg:w-[30%]"/>
+          <h1 className="text-center text-sm md:text-base pt-5 font-bold text-red-500">
+            Currently your not affiliate with any company, Please contact with
+            your HR manager
+          </h1>
+        </div>
+      ) : (
+        <div className="contain px-2 md:px-3 lg:scroll-px-40">
+          <section className="mb-10">
+            <h2 className="text-[2rem] text-center pt-5 font-semibold mb-3">
+              My Pending Requests
+            </h2>
+            {pendingRequests.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-5">
+                {pendingRequests.map((item) => (
+                  <div
+                    className="w-full border p-3 rounded-lg shadow"
+                    key={item._id}
+                  >
+                    <img
+                      src={item.productImage}
+                      alt=""
+                      className="rounded-lg h-44 w-full object-cover"
+                    />
+                    <h1 className="text-base font-semibold mt-2 text-gray-700">
+                      Product Name:{" "}
+                      <span className="text-black">{item.productName}</span>
+                    </h1>
+                    <h2 className="text-base font-semibold text-gray-700">
+                      Product Type:{" "}
+                      <span className="text-black">{item.productType}</span>
+                    </h2>
+                    <h1 className="text-base font-semibold text-gray-700">
+                      Requester Name:{" "}
+                      <span className="text-black">{item.requesterName}</span>
+                    </h1>
+                    <h2 className="text-base font-semibold text-gray-700">
+                      Request Date:{" "}
+                      <span className="text-black">{item.requestedDate}</span>
+                    </h2>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <p>No pending requests</p>
-        )}
-      </section>
+            ) : (
+              <p>No pending requests</p>
+            )}
+          </section>
 
-      <section className="mb-10">
-        <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">My Monthly Requests</h2>
-        {monthlyRequests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 mt-5">
-            {monthlyRequests.map((item) => (
-              <div className="w-full border p-3 rounded-lg shadow" key={item._id}>
-                <img
-                  src={item.productImage}
-                  alt=""
-                  className="rounded-lg h-44 w-full object-cover"
-                />
-                <h1 className="text-base font-semibold mt-2 text-gray-700">
-                  Product Name: <span className="text-black">{item.productName}</span>
-                </h1>
-                <h2 className="text-base font-semibold text-gray-700">
-                  Product Type: <span className="text-black">{item.productType}</span>
-                </h2>
-                <h1 className="text-base font-semibold text-gray-700">
-                  Requester Name: <span className="text-black">{item.requesterName}</span>
-                </h1>
-                <h2 className="text-base font-semibold text-gray-700">
-                  Request Date: <span className="text-black">{item.requestedDate}</span>
-                </h2>
+          <section className="mb-10">
+            <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">
+              My Monthly Requests
+            </h2>
+            {monthlyRequests.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-5">
+                {monthlyRequests.map((item) => (
+                  <div
+                    className="w-full border p-3 rounded-lg shadow"
+                    key={item._id}
+                  >
+                    <img
+                      src={item.productImage}
+                      alt=""
+                      className="rounded-lg h-44 w-full object-cover"
+                    />
+                    <h1 className="text-base font-semibold mt-2 text-gray-700">
+                      Product Name:{" "}
+                      <span className="text-black">{item.productName}</span>
+                    </h1>
+                    <h2 className="text-base font-semibold text-gray-700">
+                      Product Type:{" "}
+                      <span className="text-black">{item.productType}</span>
+                    </h2>
+                    <h1 className="text-base font-semibold text-gray-700">
+                      Requester Name:{" "}
+                      <span className="text-black">{item.requesterName}</span>
+                    </h1>
+                    <h2 className="text-base font-semibold text-gray-700">
+                      Request Date:{" "}
+                      <span className="text-black">{item.requestedDate}</span>
+                    </h2>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <p>No requests made this month</p>
-        )}
-      </section>
+            ) : (
+              <p>No requests made this month</p>
+            )}
+          </section>
 
-      <section className="pb-10">
-        <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">Calendar</h2>
-        {renderCalendar()}
-      </section>
-    </div>
-        }
+          <section className="pb-10">
+            <h2 className="text-[2rem] text-center mt-10 lg:mt-20 font-semibold mb-3">
+              Calendar
+            </h2>
+            {renderCalendar()}
+          </section>
+        </div>
+      )}
     </div>
   );
 };

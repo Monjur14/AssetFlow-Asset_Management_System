@@ -186,7 +186,7 @@ const JoinAsAdmin = () => {
 
         {selectedPackage && !isPaymentSuccessful && (
           <div className="mt-8">
-            <h2 className="text-xl mb-4">Payment</h2>
+            <h2 className="text-xl mb-4 font-bold">Payment</h2>
             <Elements stripe={stripePromise}>
               <CheckoutForm amount={parseInt(selectedPackage) * 100} onSuccess={() => setIsPaymentSuccessful(true)} />
             </Elements>
