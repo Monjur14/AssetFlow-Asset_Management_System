@@ -3,7 +3,7 @@ import AboutUsPoints from "../Components/AboutUsPoints"
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen w-full bg1 overflow-hidden py-5 lg:py-0">
+    <div className="min-h-screen md:h-screen w-full bg1 overflow-hidden py-5 lg:py-0">
       <div className="flex flex-col lg:flex-row contain px-2 md:px-3 lg:px-0 w-full h-full items-center gap-5 lg:gap-0">
       <div className="basis-1/2">
       <p className='px-7 md:px-10 rounded-2xl inline-block text-purple text-[1.2rem] md:text-[1.3rem] font-semibold bg-purple/30 text-left'>About Us</p>

@@ -5,7 +5,7 @@ import { IoMdCheckmark } from 'react-icons/io'
 
 const AboutUsPoints = ({ tag, tittle, bg}) => {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 zind2">
         <div>
             <span className={`text-[0.8rem] md:text-[1.5rem] lg:text-[1.2rem] 2xl:text-[1.5rem] p-2 rounded-full text-white ${bg} inline-block`}><IoMdCheckmark /></span>
         </div>

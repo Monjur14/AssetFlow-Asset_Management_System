@@ -8,8 +8,9 @@
 .no-scroll {
   overflow: hidden;
 }
-.shh{
-  z-index: 99999999;
+.zind2{
+  position: relative;
+  z-index: 99;
 }
 .contain{
   max-width: 1200px;
