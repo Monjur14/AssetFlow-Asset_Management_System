@@ -50,7 +50,7 @@ const HeroSection = () => {
                 </div>
               </div>
               <Link
-                to={"/joinasemployee"}
+                to={"/joinasadmin"}
                 className="px-8 md:px-10 py-1 md:py-2 bg-purple/80 text-white rounded-3xl mt-5 md:mt-8 text-sm md:text-base font-semibold mb-10"
               >
                 <button>Join as HR Manager</button>
@@ -99,7 +99,7 @@ const HeroSection = () => {
                 </div>
               </div>
               <Link
-                to={"/joinasadmin"}
+                to={"/joinasemployee"}
                 className="px-8 md:px-10 py-1 md:py-2 bg-purple/80 text-white rounded-3xl mt-5 md:mt-8 text-sm md:text-base font-semibold"
               >
                 <button>Join as Employee</button>

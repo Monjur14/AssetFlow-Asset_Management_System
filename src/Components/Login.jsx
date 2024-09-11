@@ -33,6 +33,13 @@ const Login = () => {
 			toast.error("Please enter a valid email & password")
 		})
 	  }
+	
+	const googleLogIn = async () => {
+		await googleLogin()
+		.then(() => {
+			navigate("/");
+		})
+	}
 
     useEffect(() => {
         document.title = 'Login Page';
@@ -47,7 +54,7 @@ const Login = () => {
       <div className="w-full mx-auto max-w-md p-4 rounded-md  sm:p-8">
 	<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
 	<div className="my-6 space-y-4">
-		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border border-black rounded-md focus:ring-2 focus:ring-offset-1" onClick={() => googleLogin()}>
+		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border border-black rounded-md focus:ring-2 focus:ring-offset-1" onClick={googleLogIn}>
 			<img src="/src/assets/googleLogo.png" alt="" className="w-6"/>
 			<p>Login with Google</p>
 		</button>

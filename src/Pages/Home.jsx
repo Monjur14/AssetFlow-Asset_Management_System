@@ -26,7 +26,6 @@ const Home = () => {
 console.log(data)
 const filterData = data?.filter((item) => item?.email === user?.email)
 const roles = filterData?.[0]?.role
-console.log(roles)
   return (
     <div>
       <Helmet>

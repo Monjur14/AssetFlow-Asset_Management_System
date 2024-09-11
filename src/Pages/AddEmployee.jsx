@@ -7,7 +7,7 @@ const AddEmployee = () => {
   const { user } = UseAuth();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const mainData = data?.filter((item) => item?.affiliateWith === "");
+  const mainData = data?.filter((item) => item?.affiliateWith === "" && item?.role === "Employee");
   const adminData = data?.filter((item) => item?.email === user?.email);
   const teamData = data?.filter(
     (item) => item?.affiliateWith === adminData[0]?.companyName

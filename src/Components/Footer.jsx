@@ -19,10 +19,10 @@ const Footer = () => {
           <div className="md:max-w-md lg:col-span-2">
             <img src="/logo1.png" alt="" className="w-36 md:w-52"/>
             <div className="mt-4 lg:max-w-sm">
-              <p className="text-sm text-deep-purple-50">
+              <p className="text-sm lg:text-xs 2xl:text-sm text-deep-purple-50">
 			  Our asset management system ensures the seamless tracking and maintenance of all your valuable assets and inefficiencies.
               </p>
-              <p className="mt-4 text-sm text-deep-purple-50">
+              <p className="mt-4 text-sm lg:text-xs 2xl:text-sm text-deep-purple-50">
 			  Developed by industry expert, our system provides unparalleled accuracy and reliability, optimal performance for your asset portfolio.
               </p>
             </div>

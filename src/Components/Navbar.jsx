@@ -50,10 +50,10 @@ const Navbar = () => {
               data-tooltip-id="my-tooltip"
               data-tooltip-content="AssetFlow"
             >
-              <img src="/logo1.png" alt="" className="w-32 lg:w-44" />
+              <img src="/logo1.png" alt="" className="w-32 lg:w-40 2xl:w-44" />
             </Link>
             <Tooltip id="my-tooltip" className="z-50" />
-            <ul className="gap-5 items-center text-sm lg:text-lg hidden lg:flex">
+            <ul className="gap-5 items-center text-sm lg:text-sm 2xl:text-lg hidden lg:flex">
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
@@ -234,7 +234,7 @@ const Navbar = () => {
               <img src="/logo1.png" alt="" />
             </Link>
             <Tooltip id="my-tooltip" className="z-50" />
-            <ul className="gap-5 items-center text-xl hidden lg:flex">
+            <ul className="gap-5 items-center lg:text-lg 2xl:text-xl hidden lg:flex">
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
