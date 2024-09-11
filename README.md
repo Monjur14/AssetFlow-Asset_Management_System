@@ -29,7 +29,6 @@ The Asset Management System is a web application designed to help businesses eff
 - Firebase
 - Stripe
 - React Query
-- Material-UI
 - React PDF Renderer
 - Chart.js
 - Emotion
@@ -38,14 +37,12 @@ The Asset Management System is a web application designed to help businesses eff
 - React Icons
 - Swiper
 - SweetAlert2
-- React Leaflet
 - React Tooltip
-- MUI Data Grid
 
 ## Getting Started
 1. Clone this repository.
 2. Install dependencies with `npm install`.
 3. Set up Firebase and Stripe configurations.
-4. Run the application with `npm start`.
-5. Access the application at `https://assetflow-14.netlify.app`.
+4. Run the application with `npm run dev`.
+5. Access the application at your localhost address.
 

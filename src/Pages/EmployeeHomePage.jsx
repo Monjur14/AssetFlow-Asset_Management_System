@@ -121,7 +121,7 @@ const EmployeeHomePage = () => {
         <div className="w-full bg1 min-h-screen">
       {userData?.affiliateWith === "" ? (
         <div className="flex flex-col items-center justify-center h-[70vh]">
-          <img src="/src/assets/NotFoundSVG.svg" alt="" className="w-full lg:w-[30%]"/>
+          <img src="NotFoundSVG.svg" alt="" className="w-full lg:w-[30%]"/>
           <h1 className="text-center text-sm md:text-base pt-5 font-bold text-red-500">
             Currently your not affiliate with any company, Please contact with
             your HR manager
